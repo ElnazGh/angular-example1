@@ -1,0 +1,19 @@
+.main-page-holder {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0px;
+    background-color: #f3f5f8;
+    color: #2f353e;
+    z-index: 0;
+}
+.section-container {
+    display: block;
+    width: calc(100% - 40px);
+    height: auto;
+    margin: 0 auto;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+}
