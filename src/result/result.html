@@ -1,0 +1,666 @@
+<div class="tab-pane" ng-form="subForm">
+
+    <!-- Start Tabs -->
+    <ul class="report-tabs">
+        <li ng-hide="isSet(1)" class="back-link" ng-class="{ active: isSet(1) }">
+            <a href ng-show="activeBack" ng-click="setTab(1)"> 
+                <i class="icon fa fa-arrow-left"></i>
+                <span>Back</span>
+            </a>
+        </li>
+        <li ng-show="reportActive" class="report-has-sub">
+            <ul>
+                <li ng-repeat="report in totalReports track by $index" ng-class="{ active: isSet(totalReports[$index].id) }" ng-show="(totalReports[$index].id == 2) || (report2Active && totalReports[$index].id == 3)"> <!-- ng-show="report2Active" -->
+                    <a href ng-click="setTab(totalReports[$index].id)">
+                        <i class="icon fa fa-bar-chart"></i>
+                        <span>Report Schedual {{totalReports[$index-1].id}}</span>
+                    </a>
+                </li>
+                <!-- <li ng-show="report2Active" ng-class="{ active: isSet(3) }">
+                    <a href ng-click="setTab(3)">
+                        <i class="icon fa fa-bar-chart"></i>
+                        <span>Report Schedual2</span>
+                    </a>
+                </li> -->
+            </ul>
+        </li>
+    </ul> 
+    <section ng-show="isSet(1)">
+         <!-- Start Form -->
+        <div class="group-ctrl disabled-member">
+            <input id="member" name="member" type="checkbox" ng-model="disableBtn" value="member" /> 
+            <label class="control-label long-label" for="Member">Member</label>
+        </div>
+        <div class="group-ctrl voucher-points">
+            <input id="voucher" name="voucher" type="checkbox" ng-model="bpVoucher" value="voucher" /> 
+            <label class="control-label long-label" for="voucher">Bonus Points - Voucher</label>
+        </div>
+        <!-- Welcome Name field -->
+        <div class="group-ctrl" ng-class="{'has-error':subForm.welcomeName.$error.required && !subForm.welcomeName.$pristine, 'item-disabled': disableBtn}">
+            <label for="welcomeName">Welcome Name</label>
+            <input id="welcomeName" 
+                    name="welcomeName" 
+                    type="text" 
+                    placeholder="Welcome Name" 
+                    ng-model="vm.formData.welcomeName" ng-disabled="disableBtn" class="form-control" required /> 
+
+            <p ng-show="subForm.welcomeName.$error.required && !subForm.welcomeName.$pristine" class="error-message" >
+                This field is required.
+            </p>
+        </div> <!-- End - Welcome Name field -->
+
+        <!-- Start Store Section -->
+        <div class="group-ctrl storedd-sec" ng-class="{'has-error': !hasError, 'item-disabled': disableBtn}">
+            <label class="control-label" for="storedd">Store</label>
+            <div class="storedd-container" >
+                <div class="storedd" > 
+                    <button type="button" ng-model="storeddNotSelected" ng-click="addAll()" ng-disabled="disableBtn" > Add All</button>
+
+                    <div class="mega-select-wrapper" >
+                        <div class="mega-select-filter-input"> <!-- ng-hide="!vm.formData.show_filter"  -->
+                            <input id="notSelectedSearch" name="notSelectedSearch" type="search" placeholder="Filter" ng-model="notSelectedSearch" class="form-control" />
+                        </div>
+
+                        <div class="mega-select-options">
+                            <!-- ngRepeat: option in ctrl.options -->
+                            <div class="mega-select-option" ng-repeat="storeOption in storeOptions | filter:notSelectedSearch track by $index" >
+                                
+                                <label ng-class="{'item-disabled': storeOption.removed || disableBtn}">{{storeOption.name}}
+                                    
+                                    <input id="{{storeOption.name}}" type="checkbox"
+                                        name="selectedOptions[]"
+                                        value="{{storeOption.name}}"
+                                        ng-model="storeOption.selected" ng-required="!hasError" ng-disabled="storeOption.removed || disableBtn"/> 
+
+                                    <i ng-if="storeOption.selected" class="mega-select-icon fa fa-times" ></i>
+                                    <i ng-if="!storeOption.selected" class="mega-select-icon fa fa-check" ></i>
+                                </label>
+
+                            </div><!-- end ngRepeat: option in ctrl.options -->
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="storedd" >
+                    <button type="button" ng-model="vm.formData.storeddSelected" ng-click="removeAll()" ng-disabled="disableBtn" > Remove All</button>
+
+                    <div class="mega-select-wrapper" >
+                        <div class="mega-select-filter-input">
+                            <input id="selectedSearch" name="selectedSearch" type="search" placeholder="Filter" ng-model="selectedSearch" class="form-control" ng-disabled="storeOption.removed || disableBtn" />
+                        </div>
+                        <div class="mega-select-options">
+                            <!-- ngRepeat: option in ctrl.options -->
+                            <div class="mega-select-option" ng-repeat="storeSelectedOption in storeSelectedOptions.values | filter:selectedSearch track by $index" ng-model="storeSelectedOption">
+                                <label ng-class="{'item-disabled': storeOption.removed || disableBtn}" >{{storeSelectedOption}}
+
+                                    <input ng-click="removeListItem(storeSelectedOption)" ng-disabled="disableBtn" />
+                                    <i ng-if="storeSelectedOption" class="mega-select-icon fa fa-times" ></i>
+                                </label>
+                            </div><!-- end ngRepeat: option in ctrl.options -->
+                        </div>
+
+                    </div>  
+                    <i class="storedd-icon fa fa-arrows-h" ></i>
+                </div>
+
+                <p ng-show="!hasError && !disableBtn" class="error-message" >
+                    This field is required.
+                </p>
+            </div>
+
+        </div> <!-- End - Store Section -->
+
+        <!-- Bonus section - Voucher -->
+        <div class="selection voucher" ng-class="{'item-disabled': disableBtn}" ng-if="bpVoucher" >
+            <span>Please select as you wish to pay your members bonus points:</span>
+            <!-- First bonus section -->
+
+            <div class="group-ctrl bonus-section" >
+                <input id="validEmailBonus" name="validEmailBonus" type="checkbox" ng-model="vm.formData.validEmailBonus" value="validEmailBonus" ng-disabled="disableBtn" />
+                <label class="control-label long-label" for="validEmailBonus">If they provided a valid email address.</label>
+
+                <div class="checkbox-sub" ng-show="vm.formData.validEmailBonus">
+
+                     <div class="group-ctrl" ng-class="{'has-error':subForm.validEmailVoucher.$error.required && !subForm.validEmailVoucher.$pristine}">
+
+                        <label class="control-label" for="validEmailVoucher">Voucher Dollar Amount:</label>
+                        <input id="validEmailVoucher" 
+                            name="validEmailVoucher" 
+                            type="number" 
+                            placeholder="$ Voucher Dollar Amount"  
+                            class="form-control" 
+                            ng-model="vm.formData.validEmailVoucher"
+                            ng-required="vm.formData.validEmailBonus" 
+                            ng-disabled="disableBtn" 
+                            ng-pattern="/^[0-9]{1,7}$/" />
+
+                        <i class="fa fa-info-circle info-tooltip voucher">
+                            <span class="tooltip-wrapper">
+                                <span class="tooltiptext open-tooltip">25 Voucher Dollar amount = 100 points</span>
+                            </span>
+                        </i>
+
+                        <p ng-show="subForm.validEmailVoucher.$error.required && !subForm.validEmailVoucher.$pristine" class="error-message" >
+                            This field is required.
+                        </p>
+                    </div>
+
+                    <div class="group-ctrl" ng-class="{'has-error':subForm.validEmailVoucherExpiryID.$error.required && !subForm.validEmailVoucherExpiryID.$pristine}">
+                        <label class="control-label" for="validEmailVoucherExpiry">Voucher expiry:</label> 
+                        <div class="select-wrapper"> 
+                            <select id="validEmailVoucherExpiry" 
+                                    name="validEmailVoucherExpiryID" 
+                                    ng-model="validEmailVoucherExpiry"
+                                    ng-options="validEmailVoucherExpiry as validEmailVoucherExpiry.label for validEmailVoucherExpiry in validEmailVoucherExpiries"
+                                    ng-change="selectedOptionFn(validEmailVoucherExpiry.label, validEmailVoucherExpiries, 'validEmailVoucherExpiries')"
+                                    class="form-control" 
+                                    ng-required="vm.formData.validEmailBonus" 
+                                    ng-disabled="disableBtn" >
+                                <option value="" >Select Voucher expiry
+                                    <i class="fa fa-chevron-down" ng-class="{'fa-chevron-up': validEmailVoucherExpiryID, 'fa-chevron-down': !validEmailVoucherExpiryID}"></i>  
+                                </option>
+                            </select> 
+                            <i class="fa fa-chevron-down" ></i> 
+                            <p ng-show="subForm.validEmailVoucherExpiryID.$error.required && !subForm.validEmailVoucherExpiryID.$pristine" class="error-message" >
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+
+                 </div>         
+            </div> <!-- End first bonus section -->
+            <!-- Second bonus section -->
+            <div class="group-ctrl bonus-section"> 
+                <input id="shopBonus" name="shopBonus" type="checkbox" ng-model="vm.formData.shopBonus" value="shopBonus" ng-disabled="disableBtn" />  
+                <label for="shopBonus" class="control-label long-label" >If they shop in the month after they join.</label> 
+
+                <div class="checkbox-sub" ng-show="vm.formData.shopBonus">
+
+                    <div class="group-ctrl" ng-class="{'has-error':subForm.shopVoucher.$error.required && !subForm.shopVoucher.$pristine}">
+
+                        <label for="shopVoucher" class="control-label" >Voucher Dollar Amount:</label> 
+                        <input id="shopVoucher" 
+                            name="shopVoucher" 
+                            type="number" 
+                            placeholder="$ Voucher Dollar Amount" 
+                            class="form-control"  
+                            ng-model="vm.formData.shopVoucher" 
+                            ng-required="vm.formData.shopBonus" 
+                            ng-disabled="disableBtn" 
+                            ng-pattern="/^[0-9]{1,7}$/" />
+                        
+                        <i class="fa fa-info-circle info-tooltip voucher">
+                            <span class="tooltip-wrapper">
+                                <span class="tooltiptext open-tooltip">25 Voucher Dollar amount = 100 points</span>
+                            </span>
+                        </i>
+
+                        <p ng-show="subForm.shopVoucher.$error.required && !subForm.shopVoucher.$pristine" class="error-message" >
+                            This field is required.
+                        </p>
+                    </div>
+
+                    <div class="group-ctrl" ng-class="{'has-error':subForm.shopVoucherExpiryID.$error.required && !subForm.shopVoucherExpiryID.$pristine}" >
+                        <label class="control-label" for="shopVoucherExpiry">Voucher expiry:</label>
+
+                        <div class="select-wrapper">
+                            <select id="shopVoucherExpiry" 
+                                    name="shopVoucherExpiryID" 
+                                    ng-model="shopVoucherExpiry"
+                                    ng-options="shopVoucherExpiry as shopVoucherExpiry.label for shopVoucherExpiry in shopVoucherExpiries" 
+                                    ng-change="selectedOptionFn(shopVoucherExpiry.label, shopVoucherExpiries, 'shopVoucherExpiries')"
+                                    class="form-control" 
+                                    ng-required="vm.formData.shopBonus" 
+                                    ng-disabled="disableBtn" > 
+                                <option value="" >Select Voucher expiry</option>
+                            </select>
+                            <i class="fa fa-chevron-down" ></i> 
+                        </div>
+
+                        <p ng-show="subForm.shopVoucherExpiryID.$error.required && !subForm.shopVoucherExpiryID.$pristine" class="error-message" >
+                            This field is required.
+                        </p>
+                    </div>
+
+                 </div>         
+            </div> <!-- End second bonus section -->
+            <!-- Third bonus section -->
+            <div class="group-ctrl bonus-section">
+                <input id="onlineRegBonus" name="onlineRegBonus" type="checkbox" ng-model="vm.formData.onlineRegBonus" value="onlineRegBonus" ng-disabled="disableBtn" />  
+
+                <label for="onlineRegBonus" class="control-label long-label" >If they complete their registration online.</label> 
+                <div class="checkbox-sub" ng-show="vm.formData.onlineRegBonus">
+
+                     <div class="group-ctrl" ng-class="{'has-error':subForm.onlineRegVoucher.$error.required && !subForm.onlineRegVoucher.$pristine}">
+
+                        <label for="onlineRegVoucher" class="control-label" >Voucher Dollar Amount</label>
+                        <input id="onlineRegVoucher" 
+                            name="onlineRegVoucher" 
+                            type="number" 
+                            placeholder="$ Voucher Dollar Amount" 
+                            class="form-control" 
+                            ng-model="vm.formData.onlineRegVoucher" 
+                            ng-required="vm.formData.onlineRegBonus" 
+                            ng-disabled="disableBtn" 
+                            ng-pattern="/^[0-9]{1,7}$/" />
+
+                        <i class="fa fa-info-circle info-tooltip voucher">
+                            <span class="tooltip-wrapper">
+                                <span class="tooltiptext open-tooltip">25 Voucher Dollar amount = 100 points</span>
+                            </span>
+                        </i>
+
+                        <p ng-show="subForm.onlineRegVoucher.$error.required && !subForm.onlineRegVoucher.$pristine" class="error-message" >
+                            This field is required.
+                        </p>
+                    </div>
+
+                    <div class="group-ctrl" ng-class="{'has-error':subForm.onlineRegVoucherExpiryID.$error.required && !subForm.onlineRegVoucherExpiryID.$pristine}" >
+
+                        <label class="control-label" for="onlineRegVoucherExpiry">Voucher expiry</label>
+
+                        <div class="select-wrapper"> <!-- .value -->
+                            <select id="onlineRegVoucherExpiry" 
+                                    name="onlineRegVoucherExpiryID" 
+                                    ng-model="onlineRegVoucherExpiry"
+                                    ng-options="onlineRegVoucherExpiry as onlineRegVoucherExpiry.label for onlineRegVoucherExpiry in onlineRegVoucherExpiries" 
+                                    ng-change="selectedOptionFn(onlineRegVoucherExpiry.label, onlineRegVoucherExpiries, 'onlineRegVoucherExpiries')" 
+                                    class="form-control" 
+                                    ng-required="vm.formData.onlineRegBonus" 
+                                    ng-disabled="disableBtn" class="test" >
+                                <option value="" >Select Voucher expiry</option>
+                            </select>
+                            <i class="fa fa-chevron-down" ></i>
+                        </div>
+
+                        <p ng-show="subForm.onlineRegVoucherExpiryID.$error.required && !subForm.onlineRegVoucherExpiryID.$pristine" class="error-message" >
+                            This field is required.
+                        </p>
+                    </div>
+                 </div>        
+            </div> <!-- End third bonus section -->
+        </div> <!-- End bonus section - Voucher -->
+
+        <!-- Points -->
+
+        <!-- Bonus section -->
+        <div class="selection" ng-class="{'item-disabled': disableBtn}" ng-if="!bpVoucher">
+            <span>Please select as you wish to pay your members bonus points:</span>
+            <!-- First bonus section -->
+
+            <div class="group-ctrl bonus-section" >
+                <input id="validEmailBonusPoints" name="validEmailBonusPoints" type="checkbox" ng-model="vm.formData.validEmailBonusPoints" value="validEmailBonusPoints" ng-disabled="disableBtn" />
+                <label class="control-label long-label" for="validEmailBonusPoints">If they provided a valid email address.</label>
+
+                <div class="checkbox-sub" ng-show="vm.formData.validEmailBonusPoints">
+
+                     <div class="group-ctrl" ng-class="{'has-error':subForm.validEmailPoints.$error.required && !subForm.validEmailPoints.$pristine}">
+
+                        <label class="control-label" for="validEmailPoints">Gift Amount In Points:</label>
+                        <i class="fa fa-info-circle info-tooltip points">
+                            <span class="tooltip-wrapper">
+                                <span class="tooltiptext open-tooltip">25 Voucher Dollar amount = 100 points</span>
+                            </span>
+                        </i>
+                        <input id="validEmailPoints" 
+                            name="validEmailPoints" 
+                            type="number" 
+                            placeholder="Points"  
+                            class="form-control" 
+                            ng-model="vm.formData.validEmailPoints" 
+                            ng-required="vm.formData.validEmailBonusPoints" 
+                            ng-disabled="disableBtn" 
+                            ng-pattern="/^[0-9]{1,7}$/" />
+
+                        <span class="voucher-points">
+                            <p ng-if="vm.formData.validEmailPoints">$ {{vm.formData.validEmailPoints}}</p>
+                            <p ng-if="!vm.formData.validEmailPoints"> $ Values</p>
+                        </span>
+
+                        <p ng-show="subForm.validEmailPoints.$error.required && !subForm.validEmailPoints.$pristine" class="error-message" >
+                            This field is required.
+                        </p>
+                    </div>
+
+                 </div>         
+            </div> <!-- End first bonus section -->
+            <!-- Second bonus section -->
+            <div class="group-ctrl bonus-section">
+                <input id="shopBonusPoints" name="shopBonusPoints" type="checkbox" ng-model="vm.formData.shopBonusPoints" value="shopBonusPoints" ng-disabled="disableBtn" />  
+                <label for="shopBonusPoints" class="control-label long-label" >If they shop in the month after they join.</label> 
+
+                <div class="checkbox-sub" ng-show="vm.formData.shopBonusPoints">
+
+                    <div class="group-ctrl" ng-class="{'has-error':subForm.shopPoints.$error.required && !subForm.shopPoints.$pristine}">
+
+                        <label for="shopPoints" class="control-label" >Gift Amount In Points:</label> 
+                        <input id="shopPoints" 
+                            name="shopPoints" 
+                            type="number" 
+                            placeholder="Points" 
+                            class="form-control" 
+                            ng-model="vm.formData.shopPoints" 
+                            ng-required="vm.formData.shopBonusPoints" 
+                            ng-disabled="disableBtn" 
+                            ng-pattern="/^[0-9]{1,7}$/" />
+                        
+                        <i class="fa fa-info-circle info-tooltip points">
+                            <span class="tooltip-wrapper">
+                                <span class="tooltiptext open-tooltip">25 Voucher Dollar amount = 100 points</span>
+                            </span>
+                        </i>
+
+                        <span class="voucher-points">
+                            <p ng-if="vm.formData.shopPoints">$ {{vm.formData.shopPoints}}</p>
+                            <p ng-if="!vm.formData.shopPoints"> $ Values</p>
+                        </span>
+
+                        <p ng-show="subForm.shopPoints.$error.required && !subForm.shopPoints.$pristine" class="error-message" >
+                            This field is required.
+                        </p>
+                    </div>
+
+                 </div>         
+            </div> <!-- End second bonus section -->
+            <!-- Third bonus section -->
+            <div class="group-ctrl bonus-section">
+                <input id="onlineRegBonusPoints" name="onlineRegBonusPoints" type="checkbox" ng-model="vm.formData.onlineRegBonusPoints" value="onlineRegBonusPoints" ng-disabled="disableBtn" />  
+
+                <label for="onlineRegBonusPoints" class="control-label long-label" >If they complete their registration online.</label> 
+                <div class="checkbox-sub" ng-show="vm.formData.onlineRegBonusPoints">
+
+                     <div class="group-ctrl" ng-class="{'has-error':subForm.onlineRegPoints.$error.required && !subForm.onlineRegPoints.$pristine}">
+
+                        <label for="onlineRegPoints" class="control-label" >Gift Amount In Points:</label>
+                        <input id="onlineRegPoints" 
+                            name="onlineRegPoints" 
+                            type="number" 
+                            placeholder="Points" 
+                            class="form-control" 
+                            ng-model="vm.formData.onlineRegPoints" 
+                            ng-required="vm.formData.onlineRegBonusPoints" 
+                            ng-disabled="disableBtn" 
+                            ng-pattern="/^[0-9]{1,7}$/" />
+
+                        <i class="fa fa-info-circle info-tooltip points">
+                            <span class="tooltip-wrapper">
+                                <span class="tooltiptext open-tooltip">25 Voucher Dollar amount = 100 points</span>
+                            </span>
+                        </i>
+
+                        <span class="voucher-points">
+                            <p ng-if="vm.formData.onlineRegPoints">$ {{vm.formData.onlineRegPoints}}</p>
+                            <p ng-if="!vm.formData.onlineRegPoints"> $ Values</p>
+                        </span>
+
+                        <p ng-show="subForm.onlineRegPoints.$error.required && !subForm.onlineRegPoints.$pristine" class="error-message" >
+                            This field is required.
+                        </p>
+                    </div>
+
+                 </div>  
+            </div> <!-- End third bonus section -->
+        </div> <!-- End bonus section -->
+
+        <!-- Templating and send timing -->
+        <div class="email-section" ng-class="{'item-disabled': disableBtn}">
+            <span>Template and send timing:</span>
+
+            <div class="schedual-section" ng-class="{'item-disabled': addBtnDisabled}">
+                <button type="button" ng-click="cloneRow()" ng-disabled="disableBtn || addBtnDisabled">Schedual Second Email
+                    <i class="fa fa-plus"></i>
+                </button>
+
+                <div id="schedualSec{{$index}}" ng-repeat="schedualSec in schedualSections track by $index" ng-if="$index < 2" class="schedual-email" ng-model="schedualSec[$index]" > 
+
+                    <div class="group-ctrls" > 
+
+                        <h4>{{'Schedual '+($index+1)}}</h4>
+
+                         <a ng-click="removeRow($index)" class="remove-link" ng-if="$index != 0" > 
+                            <i class="fa fa-minus-circle"></i>
+                        </a>
+
+                        <div class="group-ctrl" 
+                            ng-class="{'has-error':subForm.senderName{{$index}}.$error.required && !subForm.senderName{{$index}}.$pristine}">
+
+                            <label for="senderName" class="control-label" >From </label>
+                            <input id="senderName{{$index}}" 
+                                name="senderName{{$index}}" 
+                                ng-model="schedualSec[$index]" 
+                                ng-blur="setSchedualData(schedualSec[$index], $index)"
+                                type="text" 
+                                placeholder="Name" 
+                                class="form-control" 
+                                ng-disabled="disableBtn"
+                                required />
+
+                            <p ng-show="subForm.senderName{{$index}}.$error.required && !subForm.senderName{{$index}}.$pristine" class="error-message" >
+                                This field is required.
+                            </p>
+                        </div>
+                        <!-- Start Email Template -->
+                        <div class="group-ctrl" >
+                            <label class="control-label" for="{{'selectTemplate'+($index)}}">Email Template</label> 
+                            <div class="template-buttons"> 
+
+                                <a class="template-btn template-thumbs" href="#" data-popup-open="popupA{{$index}}" ng-model="selectTemplate[$index]" ng-click="setTempData('Template'+$index)">
+                                    <input id="selectTemplate{{$index}}" name="selectTemplate{{$index}}" type="checkbox" ng-model="selectTemplateThumbs[$index]" ng-disabled="disableBtn"/>
+                                    Select Template
+                                </a>
+
+                                <a class="template-btn" href="#" data-popup-open="popupB{{$index}}" ng-model="addContent[$index]" ng-class="{'item-disabled': disableBtn}">
+                                    Add Content
+                                </a>
+                            </div>
+                        </div> <!-- End Email Template -->
+
+                        <!-- Start pop up A -->
+                        <div class="popup" data-popup="popupA{{$index}}">
+                            <div class="popup-inner mainHeaderText">
+                                <div class="popup-content">
+                                   <h1>Marketing Activity > Quick Promotions > Editor > Welcome > Select Template</h1>
+                                   <!-- <iframe src="https://v3-testing.loyaltyone.com.au/dist/#/manager/marketing-activity/quick-promotions/editor/welcome/502/template/772" width="100%"></iframe> -->
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit ullamcorper dui et congue. Vivamus dignissim nisi vel mollis porta. Fusce vel ultricies purus. In consectetur nibh odio, mattis varius purus faucibus in. mattis varius purus faucibus in.</p>
+                                    <a class="popup-close" href="#" data-popup-close="popupA{{$index}}">Continue to schedule</a>
+                                </div>
+                            </div>
+                        </div> <!-- End pop up A -->
+                        <!-- Start pop up B -->
+                        <div>
+                            <div ng-if="!disableBtn" class="popup" data-popup="popupB{{$index}}" >
+                                <div class="popup-inner mainHeaderText">
+                                    <div class="popup-content">
+                                       <h1>Marketing Activity > Quick Promotions > Editor > Welcome > Content</h1>
+                                        <!-- <iframe src="https://v3-testing.loyaltyone.com.au/dist/#/manager/marketing-activity/quick-promotions/editor/welcome/502/content/772" width="100%"></iframe> -->
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit ullamcorper dui et congue. Vivamus dignissim nisi vel mollis porta. Fusce vel ultricies purus. In consectetur nibh odio, mattis varius purus faucibus in. mattis varius purus faucibus in.</p>
+                                        <a class="popup-close" href="#" data-popup-close="popupB{{$index}}">Continue to schedule</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End pop up B -->
+
+                        <!-- Start Days Delay -->
+                        <div ng-if="$index != 0" class="group-ctrl" ng-class="{'has-error':subForm.displayValue{{$index}}.$error.required && !subForm.displayValue{{$index}}.$pristine}">
+                            <label class="control-label" for="daysDelay{{$index}}">Days Delay</label>  
+                            <div class="group-ctrl two-dd-sec">
+
+                                <select id="daysDelay{{$index}}" 
+                                    name="daysDelay{{$index}}" 
+                                    ng-model="daysDelay[$index]"
+                                    ng-options="daysDelay.label as daysDelay.value for daysDelay in daysDelayOptions" 
+                                    ng-change="selectedOptionFn(daysDelay[$index], daysDelayOptions, 'daysDelayOptions')" 
+                                    class="form-control" ng-disabled="disableBtn" required >
+                                    <option value="" >Select</option>
+                                </select>
+
+                                <!-- <input id="displayValue{{$index}}" 
+                                        name="displayValue{{$index}}" 
+                                        type="number" 
+                                        placeholder="add/select a value"  
+                                        class="form-control" 
+                                        ng-model="daysDelay[$index]" 
+                                        ng-change="selectedOptionFn(daysDelay[$index], daysDelayOptions, 'daysDelayOptions', 'displayValue'+$index);" 
+                                        ng-disabled="disableBtn" required /> --> 
+                                        <!-- ng-pattern="/^[0-9]{1,2}$/" ng-maxlength="2" -->
+
+                                <i class="fa fa-chevron-down"></i>
+
+                                <p ng-show="subForm.displayValue{{$index}}.$error.required && !subForm.displayValue{{$index}}.$pristine" class="error-message" >
+                                    This field is required.
+                                </p>
+                               
+                            </div>   
+                        </div> <!-- End Days Delay -->
+
+                        <!-- Start Send Test Email -->
+                        <div class="test-temp-sec" ng-show="selectTemplateThumbs[$index]">
+
+                            <div class="group-ctrl"> 
+                                <label class="control-label" for="sendTest">Send Test Email</label> 
+                                <div class="preview-btns"> 
+                                    <a class="preview-btn" href="#" data-popup-open="{{'popupImg'+($index)}}">Preview</a>
+                                    <a class="preview-btn" href="#" >Send Test Email</a> <!-- data-popup-open="{{'popupD'+($index)}}" -->
+                                </div>
+                            </div>
+
+                            <div class="group-ctrl template-thumbs-sec"> 
+                                <img ng-src="content/images/image1.jpg" data-popup-open="{{'popupImg'+($index)}}">
+
+                                <div class="popup" data-popup="{{'popupImg'+($index)}}">
+                                    <div class="popup-inner mainHeaderText">
+                                        <div class="popup-content">
+                                            <h1>Marketing Activity > Quick Promotions > Editor > Welcome > Selected Template</h1>
+                                            <img ng-src="content/images/image1.jpg" />
+                                            <a class="popup-close" href="#" data-popup-close="{{'popupImg'+($index)}}">Continue to schedule</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- End Send Test Email -->
+
+                    </div> <!-- End group-ctrls -->
+
+                </div> <!-- End schedualSec -->
+            </div> <!-- End schedual-section -->
+        </div> <!-- End templating and send timing -->
+
+        <!-- Activate -->
+        <div class="group-ctrl submit">
+            <!-- <input type="checkbox" ng-model="all" > --><!-- ng-init="disableBtn=true" -->
+            <button type="submit" ng-disabled="subForm.$invalid && !disableBtn" ng-click="active()" >Activate</button> <!-- ng-disabled="disableBtn" -->
+            <a href="#" target="_self" title="cancel" class="cancel-link">Cancel</a>
+        </div> <!-- End Activate -->
+        <!-- End Form -->
+  
+    </section> <!-- End First Tab-->
+   <!-- Start second & third tabs -->
+   <section ng-show="isSet(totalReports[$index].id)" class="report-schedual1" ng-repeat="report in totalReports track by $index" > <!-- ng-class="{ active: isSet(totalReports[$index].id) }" -->
+        <div class="section-holder report-top-sec">
+            <div class="two-col">
+                <!-- Start Datepicker -->
+                <form name="dateForm" > <!-- class="form-horizontal" -->
+                    <div ng-class="{'has-error': dateForm.daterange.$invalid}"> <!-- dateForm.daterange2.$invalid -->
+                        <div class="help-block" ng-messages="dateForm.daterange.$error"> <!-- dateForm.daterange2.$error -->
+                            <p ng-message="min">Start date is too far in the past.</p>
+                            <p ng-message="max">End date is too far in the future.</p>
+                            <p ng-message="required">Range is required.</p>
+                        </div>
+                    </div>
+                    <div class="group-ctrl date-range">
+                        <label for="daterange1">Date range:</label>
+                        <input date-range-picker id="daterange{{$index}}" name="daterange{{$index}}" class="form-control date-picker" type="text" ng-model="date[$index]" options="opts" date-disabled="disabled(date[$index].startDate)" required /> 
+                        <!-- min="minDate"  -->
+                        <i class="fa fa-calendar"></i>
+
+                        <!-- min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" name='theDate' ng-required="true" -->
+                    </div>
+                </form>
+                <!-- End Datepicker -->
+                <div class="section-holder report-total">
+                    <div class="section-holder">
+                        <h1>1000</h1>
+                        <p>Total Sent</p>
+                    </div>
+                </div>
+                
+            </div> <!-- End first "two-col" --> 
+            <div class="two-col">
+                <div class="table-outter table-responsive">
+                    <table class="rep-small-tbl">
+                        <thead>
+                            <tr>
+                                <th colspan="4"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="totalData in reportTotalData track by $index">
+                                <td>{{totalData.status}}</td>
+                                <td>{{totalData.number}}</td>
+                                <td>{{totalData.percentage}}&#37;</td>
+                                <td class="{{totalData.view}}">
+                                    <span class="view-btn" href="#" data-popup-open="{{totalData.view}}{{$index}}">view</span>
+                                    <!-- Pop up -->
+                                    <div ng-if="!disableBtn" class="popup" data-popup="{{totalData.view}}{{$index}}" >
+                                        <div class="popup-inner mainHeaderText">
+                                            <div class="popup-content">
+                                               <h1>Marketing Activity > Welcome > Report > {{totalData.view}}</h1>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit ullamcorper dui et congue. Vivamus dignissim nisi vel mollis porta. Fusce vel ultricies purus. In consectetur nibh odio, mattis varius purus faucibus in. mattis varius purus faucibus in.</p>
+                                                <a class="popup-close" href="#" data-popup-close="{{totalData.view}}{{$index}}">Continue to schedule</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> <!-- End second "two-col" --> 
+        </div> <!-- End top section -->
+        <div class="section-holder report-bottom-sec">
+            <div class="select-wrapper" > <!-- ng-options="storeSelectedOption for storeSelectedOption in storeSelectedOptions" , 
+                        ng-init="storeSelectedOptions.value=storeSelectedOptions.values[0]" ng-model="storeSelectedOptions.value[$index]"-->
+                <select id="{{storeSelectedOptions.id}}{{$index}}" 
+                        name="{{storeSelectedOptions.id}}{{$index}}" 
+                        ng-model="storeSelectedOptions.value[$index]"
+                        ng-options="storeSelectedOption for storeSelectedOption in storeSelectedOptions.values" 
+                        class="form-control" 
+                        ng-change="setStoreData(storeSelectedOptions.value[$index], $index)" >
+                    <option value="" >All Selected Store: {{storeSelectedOptions.value[$index]}}</option>
+                </select> 
+                <i class="fa fa-chevron-down" ></i>
+            </div>
+            <div class="table-outter table-responsive">  <!-- scrollbox -->
+                <!-- <span class="shadow-before" ></span> --> <!-- style="margin-left: -10px;" -->
+                <table id="monthData" class="rep-main-tbl">
+                    <thead>
+                        <tr>
+                            <th>Months</th>
+                            <th ng-repeat="data in reportTotalData">{{data.status}}</th>
+                        </tr>
+                    </thead>
+                    <tbody > <!-- ng-repeat="monthData in report" -->
+                        <tr ng-repeat="eachData in reportStoreData[$index]">
+                            <td>{{eachData.month}}</td>
+                            <td>{{eachData.success}}</td>
+                            <td>{{eachData.opened}}</td>
+                            <td>{{eachData.clickedThrough}}</td>
+                            <td>{{eachData.registered}}</td>
+                            <td>{{eachData.bounced}}</td>
+                            <td>{{eachData.unsubscribed}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <span class="shadow-after" ></span> -->
+            </div>
+        </div>
+    </section>
+    <!-- End second & third tab -->
+
+<!-- End Tabs -->
+    
+</div> <!-- End tab-pane -->
+
+

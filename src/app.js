@@ -16,7 +16,7 @@
 
     // Creating our angular app and inject ui-router 
     // =============================================================================
-    var sampleApp = angular.module('sampleApp', ['ui.router'])
+    var sampleApp = angular.module('sampleApp', ['ui.router', 'smart-table'])
 
     // Configuring our states 
     // =============================================================================
@@ -44,8 +44,43 @@
                     url: '/about',
                     component: 'aboutComponent'
                 })
+
+                .state('table', {
+                    url: '/table',
+                    component: 'tableComponent'
+                })
+
+                .state('form', {
+                    url: '/form',
+                    component: 'formComponent'
+                })
+
+                // .state('result', {
+                //     url: '/result',
+                //     component: 'resultComponent'
+                // })
         }
     ]);
+
+    //Allow only digits
+    sampleApp
+        .directive('digitsOnly', function() {
+            return {
+                require: 'ngModel',
+                link: function (scope, element, attr, ngModelCtrl) {
+                    function fromUser(text) {
+                        var transformedInput = text.replace(/[^0-9]/g, '');
+                        
+                        if(transformedInput !== text) {
+                            ngModelCtrl.$setViewValue(transformedInput);
+                            ngModelCtrl.$render();
+                        }
+                        return transformedInput;
+                    }
+                    ngModelCtrl.$parsers.push(fromUser);
+                }
+            }; 
+        });
        
 })();
 

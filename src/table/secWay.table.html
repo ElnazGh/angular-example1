@@ -1,0 +1,67 @@
+<section class="main-sec">
+		<!-- smart table -->
+		<h1>Listing Example with smart-table and AngularJS</h1>
+		<div ng-show="loading"><h3>Loading...</h3></div>
+
+			<!-- smart table -->
+		<div class="table-container" >
+			
+			<div class="table-responsive">
+
+			 	<table st-table="display_records"  st-safe-src="employees" class="table table-striped">
+				   <thead>
+				   		<tr>
+				         <th colspan="3">
+				            <input st-search placeholder="global search" class="input-sm form-control" type="search"/>
+				         </th>
+				      </tr>
+				      <tr>
+				         <!-- <th>Profile</th> -->
+				         <th width="100px">Name</th>
+				         <th st-sort="salary">Salary</th>
+				         <th>Age</th>
+				      </tr>
+				      <tr>
+				          <th>
+				            <input placeholder="search employee_name" st-search="employee_name" />
+				          </th>
+				          <th>
+				            <input placeholder="search employee salary" st-search="employee_salary" />
+				          </th>
+				           <th>
+				            <input placeholder="search employee age" st-search="employee_age" />
+				          </th>
+				          <!-- <th>
+				            <st-select-distinct collection="collection" predicate="nationality"></st-select-distinct>
+				          </th>
+				          <th>
+				            <st-select-multiple collection="collection" predicate="education"></st-select-multiple>
+				          </th> -->
+				        </tr>
+				      
+				   </thead>
+				   <tbody>
+				      <tr st-select-row="row" st-select-mode="multiple" ng-repeat="row in display_records">
+				         <td>{{row.employee_name}}</td>
+				         <td>{{row.employee_salary}}</td>
+				         <td>{{row.employee_age}}</td>
+				      </tr>
+				   </tbody>
+				   <tfoot>
+				      <!-- <tr>
+				         <td colspan="5" class="text-center">
+				            <div st-pagination="" st-items-by-page="itemsByPage"></div>
+				         </td>
+				      </tr> -->
+				      <tr>
+							<td class="text-center" 
+								st-pagination="" 
+								st-items-by-page="10" 
+								colspan="9" >
+							</td>
+						</tr>
+				   </tfoot>
+				</table>
+			</div>
+		</div>
+	</section>

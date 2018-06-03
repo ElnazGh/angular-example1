@@ -10,6 +10,8 @@
     function aboutController($scope) { //FormDataModel
         console.log('Loaded');
         $scope.message = 'This is Test';
+
+        
     }
 })();
 

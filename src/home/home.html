@@ -1,6 +1,79 @@
-<section class="main-page-holder" >
+<section class="home main-page-holder" >
     <div class="section-container">
     	<h1>Home Page</h2>
+
+    	<div class="group-ctrl">
+	    	<input id="selCheckbox" 
+	    			name="selCheckbox" 
+	    			type="checkbox" 
+	    			ng-model="checked" />
+	    	<label for="selCheckbox" >Please select this item.</label>
+	    </div>
+	    <p>{{checked}}</p>
+
+    		 <!-- Start Store Section -->
+        <div class="group-ctrl" ng-class="{'has-error': !hasError, 'item-disabled': disableBtn}">
+
+            <label class="control-label" for="storedd">Store</label>
+
+            <div class="storedd-container" >
+                <div class="storedd" > 
+                    <button type="button" ng-model="storeddNotSelected" ng-click="addAll()" ng-disabled="disableBtn" > Add All</button>
+
+                    <div class="mega-select-wrapper" >
+                        <div class="mega-select-filter-input"> <!-- ng-hide="!vm.formData.show_filter"  -->
+                            <input id="notSelectedSearch" name="notSelectedSearch" type="search" placeholder="Filter" ng-model="notSelectedSearch" class="form-control" />
+                        </div>
+
+                        <div class="mega-select-options">
+                            <!-- ngRepeat: option in ctrl.options -->
+                            <div class="mega-select-option" ng-repeat="storeOption in storeOptions | filter:notSelectedSearch track by $index" >
+                                
+                                <label ng-class="{'item-disabled': storeOption.removed || disableBtn}">{{storeOption.name}}
+                                    
+                                    <input id="{{storeOption.name}}" type="checkbox"
+                                        name="selectedOptions[]"
+                                        value="{{storeOption.name}}"
+                                        ng-model="storeOption.selected" ng-required="!hasError" ng-disabled="storeOption.removed || disableBtn"/> 
+
+                                    <i ng-if="storeOption.selected" class="mega-select-icon fa fa-times" ></i>
+                                    <i ng-if="!storeOption.selected" class="mega-select-icon fa fa-check" ></i>
+                                </label>
+
+                            </div><!-- end ngRepeat: option in ctrl.options -->
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="storedd" >
+                    <button type="button" ng-model="vm.formData.storeddSelected" ng-click="removeAll()" ng-disabled="disableBtn" > Remove All</button>
+
+                    <div class="mega-select-wrapper" >
+                        <div class="mega-select-filter-input">
+                            <input id="selectedSearch" name="selectedSearch" type="search" placeholder="Filter" ng-model="selectedSearch" class="form-control" ng-disabled="storeOption.removed || disableBtn" />
+                        </div>
+                        <div class="mega-select-options">
+                            <!-- ngRepeat: option in ctrl.options -->
+                            <div class="mega-select-option" ng-repeat="storeSelectedOption in storeSelectedOptions.values | filter:selectedSearch track by $index" ng-model="storeSelectedOption">
+                                <label ng-class="{'item-disabled': storeOption.removed || disableBtn}" >{{storeSelectedOption}}
+
+                                    <input ng-click="removeListItem(storeSelectedOption)" ng-disabled="disableBtn" />
+                                    <i ng-if="storeSelectedOption" class="mega-select-icon fa fa-times" ></i>
+                                </label>
+                            </div><!-- end ngRepeat: option in ctrl.options -->
+                        </div>
+
+                    </div>  
+                    <i class="storedd-icon fa fa-arrows-h" ></i>
+                </div>
+
+                <p ng-show="!hasError && !disableBtn" class="error-message" >
+                    This field is required.
+                </p>
+            </div>
+
+        </div> <!-- End - Store Section -->
         <div ui-view></div>
     </div>   
 </section>

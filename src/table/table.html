@@ -1,0 +1,248 @@
+<div class="form-page">
+	<!-- header -->
+	<div ng-controller="tableController">
+	  	<div ng-include src="header.url"></div>
+	  	<script type="text/ng-template" id="header.html"></script>
+	</div>
+	<!-- End - header -->
+
+	<section class="main-sec">
+		<!-- smart table -->
+		<div class="table-container" st-pipe="vm.callServer" st-table="vm.displayed">
+			<div class="search-container">
+				<input digits-only type="text" placeholder="Scan Legacy Card" st-search="" class="form-control" ng-model="search" autofocus/>  <!-- or Search for Legacy Member... ng-model="search" -->
+			</div>
+
+			<div class="content-container search">
+				<h2>Search directly using key terms for Legacy Member</h2>
+				<span ng-show="(!vm.isLoading && firstName) 
+								|| (!vm.isLoading && surname) 
+								|| (!vm.isLoading && dob) 
+								|| (!vm.isLoading && phone)
+								|| (!vm.isLoading && mobile)
+								|| (!vm.isLoading && email)
+								|| (!vm.isLoading && address)
+								|| (!vm.isLoading && signUpStore)" 
+						class="default-btn default-btn-secondary" ng-click="vm.clearSearch();" >Clear All Fields</span>
+			</div>
+
+			<div class="table-responsive">
+				<table class="table" >
+					<thead>
+						<tr>
+							<!-- <th><input st-search="id"/></th> -->
+							<th>
+								<input id="firstName" 
+										name="firstName" 
+										type="Search" 
+										placeholder="First Name" 
+										st-search="firstName" 
+										ng-model="firstName" />
+							</th>
+							<th>
+								<input id="surname" 
+										name="surname" 
+										type="Search" 
+										placeholder="Surname" 
+										st-search="surname" 
+										ng-model="surname" />
+							</th>
+							<th>
+								<input id="dob" 
+										name="dob" 
+										type="Search" 
+										placeholder="DOB" 
+										st-search="dob" 
+										ng-model="dob" />
+							</th>
+							<th>
+								<input id="phone" 
+										name="phone" 
+										type="Search" 
+										placeholder="Phone" 
+										st-search="phone" 
+										ng-model="phone" />
+							</th>
+							<th>
+								<input id="mobile" 
+										name="mobile" 
+										type="Search" 
+										placeholder="mobile" 
+										st-search="mobile" 
+										ng-model="mobile" />
+							</th>
+							<th>
+								<input id="email" 
+										name="email" 
+										type="Search" 
+										placeholder="Email" 
+										st-search="email" 
+										ng-model="email" />
+							</th>
+							<th>
+								<input id="address" 
+										name="address" 
+										type="Search" 
+										placeholder="Address" 
+										st-search="address" 
+										ng-model="address" />
+							</th>
+							<th>
+								<input id="signUpStore" 
+										name="signUpStore" 
+										type="Search" 
+										placeholder="signUpStore" 
+										st-search="signUpStore" 
+										ng-model="signUpStore" />
+							</th>
+							<th>
+								<!-- <label for="existingMember" class="checkbox-container">
+								  <input id="existingMember" name="existingMember" type="checkbox" class="form-control" ng-model="checked" ng-click="showImported = !showImported" required> 
+								  <span class="checkmark"></span>
+								</label> -->
+
+								<div class="toggleWrapper">
+									<input id="existingMember" 
+											name="existingMember" 
+											type="checkbox" 
+											class="form-control" 
+											ng-model="checked" 
+											ng-click="showImported = !showImported" required>
+									<label for="existingMember" class="toggle">
+										<span class="toggle__handler"></span>
+									</label>
+								</div>
+
+							</th>
+						</tr>
+						<!-- <tr ng-show="(!vm.isLoading && search) 
+									|| (!vm.isLoading && name) 
+									|| (!vm.isLoading && surname) 
+									|| (!vm.isLoading && age) 
+									|| (!vm.isLoading && saved)"> -->
+
+									<!-- (!vm.isLoading && search) 
+								||  -->
+						<tr ng-show="(!vm.isLoading && firstName) 
+								|| (!vm.isLoading && surname) 
+								|| (!vm.isLoading && dob) 
+								|| (!vm.isLoading && phone)
+								|| (!vm.isLoading && mobile)
+								|| (!vm.isLoading && email)
+								|| (!vm.isLoading && address)
+								|| (!vm.isLoading && signUpStore)">  
+							<!-- <th st-sort="id">Id</th> -->
+							<!-- <th st-sort="name">Name</th>
+							<th st-sort="surname">Surname</th>
+							<th st-sort="age">Age</th>
+							<th st-sort="saved">Saved people</th> -->
+
+							<th st-sort="firstName">First Name</th>
+							<th st-sort="surname">Surname</th>
+							<th st-sort="dob" >DOB</th>
+							<th st-sort="phone" >Phone</th>
+							<th st-sort="mobile" >Mobile</th>
+							<th st-sort="email" >Email</th>
+							<th st-sort="address" >Address</th>
+							<th st-sort="signUpStore" >Sign Up Store</th>
+							<th st-sort="signUpStore" > Availability </th>
+						</tr>
+					</thead>
+					<tbody ng-class="{'loading': vm.isLoading}" > 
+						<!-- (!vm.isLoading && search) 
+								|| --> 
+						<tr ng-repeat="row in vm.displayed" 
+							ng-show="(!vm.isLoading && firstName) 
+								|| (!vm.isLoading && surname) 
+								|| (!vm.isLoading && dob) 
+								|| (!vm.isLoading && phone) 
+								|| (!vm.isLoading && mobile) 
+								|| (!vm.isLoading && email) 
+								|| (!vm.isLoading && address) 
+								|| (!vm.isLoading && signUpStore)" 
+								ng-model="formService.data" 
+								ng-click="vm.rowClick('/member-details', row);" 
+								ng-class="{ 'invisible': showImported && row.availability}" >
+
+								<!-- | filter:(search 
+								|| firstName 
+								|| surname 
+								|| dob 
+								|| phone 
+								|| mobile 
+								|| email 
+								|| address 
+								|| signUpStore)" -->
+
+							<!-- <td>{{row.id}}</td> -->
+							<!-- <td>{{row.name}}</td>
+							<td>{{row.surname}}</td>
+							<td>{{row.age}}</td>
+							<td>{{row.saved}}</td> -->
+
+							<td>{{row.firstName}}</td>
+							<td>{{row.surname}}</td>
+							<td>{{row.dob}}</td>
+							<td>{{row.phone}}</td>
+							<td>{{row.mobile}}</td>
+							<td>{{row.email}}</td>
+							<td>{{row.address}}</td>
+							<td>{{row.signUpStore}}</td>
+							<td class="{{row.availability}}">
+								<i ng-class="{'fa fa-check': row.availability}" ></i>
+							</td>
+						</tr>
+					</tbody>
+					<tbody ng-show="vm.isLoading" class="loading">
+						<tr>
+							<td colspan="9" class="text-center">
+								<i class="fa fa-spinner fa-pulse" ng-if="vm.isLoading"></i>
+							</td>
+						</tr>
+					</tbody>
+					<tbody ng-show="!(vm.displayed | filter:criteria).length && !vm.isLoading" class="no-item" >
+						<tr>
+							<td>
+								<p>
+									No items found
+								</p>
+							</td>
+						</tr>
+					</tbody>
+					<!-- <tfoot ng-show="(!vm.isLoading && search) 
+									|| (!vm.isLoading && name) 
+									|| (!vm.isLoading && surname) 
+									|| (!vm.isLoading && age) 
+									|| (!vm.isLoading && saved)"> -->
+
+									<!-- (!vm.isLoading && search) 
+									||  -->
+
+					<tfoot ng-if="(vm.displayed | filter:criteria).length" 
+							ng-show="(!vm.isLoading && firstName) 
+									|| (!vm.isLoading && surname) 
+									|| (!vm.isLoading && dob) 
+									|| (!vm.isLoading && phone)
+									|| (!vm.isLoading && mobile)
+									|| (!vm.isLoading && email)
+									|| (!vm.isLoading && address)
+									|| (!vm.isLoading && signUpStore)">
+						<tr>
+							<td class="text-center" 
+								st-pagination="" 
+								st-items-by-page="2" 
+								colspan="9" >
+							</td>
+						</tr>
+					</tfoot>
+				</table><!-- End Table -->
+			</div><!-- End Table wrapper -->
+		</div>
+	</section>
+	
+	<!-- footer -->
+	<div ng-controller="tableController">
+	  	<div ng-include src="footer.url"></div>
+	  	<script type="text/ng-template" id="footer.html"></script>
+	</div> <!-- End - footer -->
+</div>

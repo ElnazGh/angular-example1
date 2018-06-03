@@ -1,0 +1,148 @@
+.header-container,
+ .footer-container {
+        display: block;
+        overflow: hidden;
+        /*max-width: 1200px;*/
+        width: 100%;
+        margin: 0 auto;
+        padding: 0px 13px;
+        background-color: #c8ddff;
+        color: #bbb;
+
+        a.header-btn, a.logged-out {
+            &:hover {
+                background-color: transparent;
+                color: #bbb;
+            }
+        }
+    }
+    .header-container {
+        height: auto; /*95px;*/
+
+        h1 {
+            float: none;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        h1,
+         a.header-btn {
+            display: inline-block;
+            width: auto;
+            color: #215c70;
+        }
+
+        a.header-btn {
+            position: relative;
+            float: right;
+            min-width: 120px;
+            margin: 23px 7px 23px 0;
+            border: 1px solid #bbb;
+
+            span {
+                font-size: 14px;
+                margin-left: 18px;
+            }
+            
+            .fa {
+                position: absolute;
+                top: 16px;
+                left: 20px;
+            }
+
+            &:hover {
+                background-color: #ccc;
+                color: #000;
+                border: 1px solid #000;
+                border-radius: 4px;
+            }
+
+            &.disabled {
+                background-color: #f2f2f2;
+                color: #cbcbcb;
+                border: 1px solid #cbcbcb; 
+            }
+
+            /*&:hover .fa {
+                font-size: 16px;
+                transition: font-size 0.35s ease;
+            }*/
+        }
+    }
+
+    footer { 
+        height: 58px;
+        .footer-container {
+            text-align: center;
+            color: #bbb;
+
+            p {
+                width: auto;
+                text-align: center;
+                line-height: 18px;
+            }
+            a {
+                display: inline-block;
+                width: auto;
+                font-size: 14px;
+                color: #bbb;
+
+                &.logged-out {
+                    float: right;
+                    margin: 9px 0 0;
+                    border: 0;
+                }
+
+                &.copyRight-link {
+                    float: left;
+                    margin: 7px 0 0;
+                }
+            }
+        }
+    }
+
+.cancel-link {
+        position: relative;
+        display: inline-block;
+        float: left;
+        height: auto;
+        overflow: visible;
+        background-color: transparent;
+        color: #215c70;
+        margin: 6px 0 0 10px;
+        border-radius: 5px;
+
+        &:hover span,
+         &:hover p {
+            color: #215c70;
+        }
+        .fa {
+            position: absolute;
+            font-size: 96px;
+            color: #fff;
+            top: -20px;
+            left: -14px;
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+
+        p, span {
+            display: block;
+            width: auto;
+            text-align: right;
+            font-size: 18px;
+            line-height: 18px;
+            background-color: #fff;
+        }
+        p {
+            margin: 0;
+            padding: 10px 10px 0;
+            border-radius: 6px 6px 0 0;
+        }
+        span {
+            font-size: 13px;
+            line-height: 13px;
+            padding: 5px 10px 10px;
+            border-radius: 0 0 6px 6px;
+        }
+    }

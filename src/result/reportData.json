@@ -1,0 +1,478 @@
+// {"total":[
+//     {
+//         "status": "Success",
+//         "number": 950,
+//         "percentage": 95,
+//         "view": "success"
+//     },
+//     {
+//         "status": "Opened",
+//         "number": 900,
+//         "percentage": 90,
+//         "view": "opened"
+//     },
+//     {
+//         "status": "Clicked Through",
+//         "number": 850,
+//         "percentage": 85,
+//         "view": "clicked-through"
+//     },
+//     {
+//         "status": "Registered",
+//         "number": 800,
+//         "percentage": 80,
+//         "view": "registered"
+//     },
+//     {
+//         "status": "Bounced",
+//         "number": 50,
+//         "percentage": 5,
+//         "view": "bounced"
+//     },
+//     {
+//         "status": "Unsubscribed",
+//         "number": 50,
+//         "percentage": 5,
+//         "view": "unsubscribed"
+//     }
+// ],
+// "Pharmacy1":[
+//     {
+//         "month": "Janurary",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "February",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "March",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "April",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "May",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "June",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "July",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "August",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "September",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "October",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "November",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "December",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     }
+// ],
+// "Pharmacy2":[
+//     {
+//         "month": "Janurary",
+//         "success": 100,
+//         "opened": 250,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "February",
+//         "success": 100,
+//         "opened": 50,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "March",
+//         "success": 100,
+//         "opened": 250,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "April",
+//         "success": 250,
+//         "opened": 100,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "May",
+//         "success": 100,
+//         "opened": 250,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "June",
+//         "success": 250,
+//         "opened": 100,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "July",
+//         "success": 100,
+//         "opened": 250,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "August",
+//         "success": 250,
+//         "opened": 250,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "September",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "October",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "November",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "December",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     }
+// ],
+// "Pharmacy3":[
+//     {
+//         "month": "Janurary",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "February",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "March",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "April",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "May",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "June",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "July",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "August",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "September",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "October",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "November",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "December",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     }
+// ],
+// "Pharmacy4":[
+//     {
+//         "month": "Janurary",
+//         "success": 300,
+//         "opened": 250,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "February",
+//         "success": 300,
+//         "opened": 250,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "March",
+//         "success": 300,
+//         "opened": 100,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "April",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "May",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "June",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "July",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "August",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "September",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "October",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "November",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     },
+//     {
+//         "month": "December",
+//         "success": 200,
+//         "opened": 150,
+//         "clickedThrough": 100,
+//         "registered": 50,
+//         "bounced": 20,
+//         "unsubscribed": 10
+//     }
+// ]}

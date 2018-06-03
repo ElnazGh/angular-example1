@@ -1,0 +1,1278 @@
+<div class="form-page">
+	<!-- header -->
+	<div ng-controller="formController">
+	  	<div ng-include src="header.url"></div>
+	  	<script type="text/ng-template" id="header.view.html"></script>
+	</div>
+	<!-- End - header -->
+
+	<section class="main-sec">
+		<div class="content-container">
+			<!-- Errors -->
+			<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+
+			<!-- <div class="test" ui-view></div> -->
+			<form name="form" ng-submit="vm.migrate()" role="form" class="form_migrate">
+				<!-- left fields -->
+				<div class="group-ctrls">
+					<div class="inner-group-ctrls">
+						<!-- Salutation -->
+						<div class="form-group group-ctrl" ng-class="{'has-error': form.salutation.$invalid}"> 
+							<!-- (form.salutation.$error.required && form.salutation.$pristine) || -->
+						    <label for="salutation">Salutation:</label> <!-- class="control-label" -->
+						    <div class="select-wrapper"> 
+						    	<div class="select-container">
+							        <select id="salutation" 
+							                name="salutation" 
+							                ng-model="salutationItem"
+							                ng-options="salutationItem as salutationItem.label for salutationItem in salutation" 
+							                value="{{salutationItem.value}}" 
+							                ng-change="selectedOptionFn('salutation', salutation, salutationItem.value);"
+							                class="form-control" autofocus required>
+							            <option value="" >Select ... </option>
+							        </select> 
+							        <i class="fa fa-chevron-down" ></i> 
+						        </div>
+						        <!-- Success -->
+						         <div ng-show="!form.salutation.$invalid" class="validity-icon" >
+			                    	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+									  	<circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+								 	 	<polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+									</svg>
+			                    </div>
+			                    <!-- Missing -->
+			                    <div ng-show="form.salutation.$invalid" 
+			                    		class="form-field-alert validity-icon missing" >
+
+			                    		<i class="fa fa-exclamation-circle"></i>
+
+			                    	<!-- <div class="form-field-icon form-field-warning scaleWarning">
+										<span class="form-field-body pulseWarningIns"></span>
+										<span class="form-field-dot pulseWarningIns"></span>
+									</div> -->
+			                    </div>
+
+						        <span ng-show="form.salutation.$invalid" class="help-block missing" >
+						            Missing&#33; Add Salutation.
+						        </span>
+						    </div>
+						</div> <!-- End - Salutation -->
+					</div>
+					<div class="inner-group-ctrls">
+						<!-- Gender -->
+						<div class="form-group group-ctrl" ng-class="{'has-error': form.gender.$invalid}">
+						    <label for="gender">Gender:</label>  <!-- class="control-label"  -->
+						    <div class="select-wrapper"> 
+						    	<div class="select-container">
+							        <select id="gender" 
+							                name="gender" 
+							                ng-model="genderItem"
+							                ng-options="genderItem as genderItem.label for genderItem in gender" 
+							                value="{{genderItem.value}}"
+							                ng-change="selectedOptionFn('gender', gender, genderItem.value);"
+							                class="form-control" required>
+							            <option value="" >Select ... </option>
+							        </select> 
+							        <i class="fa fa-chevron-down" ></i>
+							    </div>
+							    <!-- Success -->
+						        <div ng-show="!form.gender.$invalid" class="validity-icon" >
+			                    	<svg version="1.1" 
+			                    			xmlns="http://www.w3.org/2000/svg" 
+			                    			viewBox="0 0 130.2 130.2">
+									  	<circle class="path circle" 
+									  			fill="none" 
+									  			stroke="#73AF55" 
+									  			stroke-width="6" 
+									  			stroke-miterlimit="10" 
+									  			cx="65.1" cy="65.1" r="62.1"/>
+								 	 	<polyline class="path check" 
+								 	 				fill="none" 
+								 	 				stroke="#73AF55" 
+								 	 				stroke-width="6" 
+								 	 				stroke-linecap="round" 
+								 	 				stroke-miterlimit="10" 
+								 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+									</svg>
+			                    </div>
+			                    <!-- Missing -->
+			                    <div ng-show="form.gender.$invalid" 
+			                    		class="form-field-alert validity-icon missing" >
+
+			                    	<div class="form-field-icon form-field-warning scaleWarning">
+										<span class="form-field-body pulseWarningIns"></span>
+										<span class="form-field-dot pulseWarningIns"></span>
+									</div>
+			                		<!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+										<circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+										<line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
+										<line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
+									</svg> -->
+			                    </div>
+						        <span ng-show="form.gender.$invalid" class="help-block missing" >
+						            Missing&#33; Add Gender.
+						        </span>
+						    </div>
+						</div> <!-- End - Gender -->
+					</div>
+
+					<!-- First Name -->
+					<div class="form-group group-ctrl" ng-class="{ 'has-error': !form.firstname.$pristine && form.firstname.$error.required 
+								|| (form.firstname.$pristine && form.firstname.$error.required) }">
+	                    <label for="firstname">First Name</label>
+	                    <input type="text" 
+	                    		name="firstname" 
+	                    		id="firstname" 
+	                    		placeholder="ellie" 
+	                    		class="form-control text-field" 
+	                    		ng-model="vm.firstname" required />
+
+	                    <!-- Backend - checking data - validation: Just to show invalid situation success and missing options are commented out  -->
+
+	                    <!-- Success -->
+	                    <div ng-show="(!form.firstname.$pristine 
+	                    			&& !form.firstname.$error.required) 
+	                    			|| !form.firstname.$error.required" 
+	                    			class="validity-icon" >
+	                    	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+							  	<circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+						 	 	<polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+							</svg>
+	                    </div>
+
+	                    <!-- Missing -->
+	                    <div ng-show="!form.firstname.$pristine && form.firstname.$error.required 
+	                    		|| (form.firstname.$pristine && form.firstname.$error.required)" 
+	                    	class="form-field-alert validity-icon missing" >
+
+	                    	<div class="form-field-icon form-field-warning scaleWarning">
+								<span class="form-field-body pulseWarningIns"></span>
+								<span class="form-field-dot pulseWarningIns"></span>
+							</div>
+	                    </div>
+	                    <!-- Missing Error message -->
+	                    <span ng-show="!form.firstname.$pristine && form.firstname.$error.required 
+	                    		|| (form.firstname.$pristine && form.firstname.$error.required)" class="help-block missing">Missing&#33; Add First Name</span>
+
+	                    <!-- Invalid -->
+	                    <!-- <div ng-show="!form.firstname.$pristine" 
+	                    		class="form-field-alert validity-icon invalid" >
+		                    <div class="form-field-icon form-field-warning scaleWarning">
+								<span class="form-field-body pulseWarningIns"></span>
+								<span class="form-field-dot pulseWarningIns"></span>
+							</div>
+						</div> -->
+	                    <!-- Invalid Error message -->				
+	                    <!-- <span ng-show="!form.firstname.$pristine" class="help-block invalid">
+	                    	Invalid&#33; re-confirm
+	                    </span> -->
+	                </div> <!-- End - First Name -->
+
+	                <!-- Surname -->
+	                <div class="form-group group-ctrl" 
+	                		ng-class="{ 'has-error': !form.surname.$pristine && form.surname.$error.required 
+								|| (form.surname.$pristine && form.surname.$error.required) }">
+	                    <label for="surname">Surname</label>
+	                    <input type="text" 
+	                    		name="surname" 
+	                    		id="surname" 
+	                    		placeholder="" 
+	                    		class="form-control text-field" 
+	                    		ng-model="vm.surname" required />
+	                    <!-- Success -->
+	                    <div ng-show="(!form.surname.$pristine 
+	                    			&& !form.surname.$error.required) 
+	                    			|| !form.surname.$error.required" class="validity-icon" >
+	                    	<svg version="1.1" 
+	                    			xmlns="http://www.w3.org/2000/svg" 
+	                    			viewBox="0 0 130.2 130.2">
+							  	<circle class="path circle" 
+							  			fill="none" 
+							  			stroke="#73AF55" 
+							  			stroke-width="6" 
+							  			stroke-miterlimit="10" 
+							  			cx="65.1" cy="65.1" r="62.1"/>
+						 	 	<polyline class="path check" 
+						 	 				fill="none" stroke="#73AF55" 
+						 	 				stroke-width="6" 
+						 	 				stroke-linecap="round" 
+						 	 				stroke-miterlimit="10" 
+						 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+							</svg>
+	                    </div>
+
+	                     <!-- Missing -->
+	                    <div ng-show="!form.surname.$pristine && form.surname.$error.required 
+	                    		|| (form.surname.$pristine && form.surname.$error.required)" 
+	                    		class="form-field-alert validity-icon missing" >
+
+	                    	<div class="form-field-icon form-field-warning scaleWarning">
+								<span class="form-field-body pulseWarningIns"></span>
+								<span class="form-field-dot pulseWarningIns"></span>
+							</div>
+	                    </div>
+	                    <span ng-show="!form.surname.$pristine && form.surname.$error.required 
+	                    		|| (form.surname.$pristine && form.surname.$error.required)" 
+	                    		class="help-block missing">Missing&#33; Add Surname</span>
+	                </div> <!-- End - Surname -->
+
+	                <!-- DOB -->
+	                <div class="inner-3col-group-ctrls">	
+	                	<div class="inner-3col-container">
+	                		<!-- Month -->
+							<div class="form-group group-ctrl" ng-class="{'has-error':form.month.$invalid}">
+							    <label for="month">Month:</label> <!-- class="control-label" --> 
+							    <div class="select-wrapper">
+							    	<div class="select-container">
+								        <select id="month" 
+								                name="month" 
+								                ng-model="monthItem"
+								                ng-options="monthItem as monthItem for monthItem in months" 
+								                value="{{monthItem.value}}" 
+								                ng-change="setDays(monthItem);" 
+								                class="form-control" required>
+								            <option value="" >Select ... </option> <!-- ng-change="selectedOptionFn(day, monthItem.value);" -->
+								        </select> 
+								        <i class="fa fa-chevron-down" ></i>
+								    </div>
+								    <!-- Success -->
+								    <div ng-show="!form.month.$invalid" class="validity-icon">
+				                    	<svg version="1.1" 
+				                    			xmlns="http://www.w3.org/2000/svg" 
+				                    			viewBox="0 0 130.2 130.2">
+										  	<circle class="path circle" 
+										  			fill="none" 
+										  			stroke="#73AF55" 
+										  			stroke-width="6" 
+										  			stroke-miterlimit="10" 
+										  			cx="65.1" cy="65.1" r="62.1"/>
+									 	 	<polyline class="path check" 
+									 	 				fill="none" 
+									 	 				stroke="#73AF55" 
+									 	 				stroke-width="6" 
+									 	 				stroke-linecap="round" 
+									 	 				stroke-miterlimit="10" 
+									 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+										</svg>
+				                    </div>
+				                    <!-- Missing -->
+				                    <div ng-show="form.month.$invalid" 
+				                    	class="form-field-alert validity-icon missing" >
+
+				                    	<div class="form-field-icon form-field-warning scaleWarning">
+											<span class="form-field-body pulseWarningIns"></span>
+											<span class="form-field-dot pulseWarningIns"></span>
+										</div>
+				                    </div>
+							        <span ng-show="form.month.$invalid" class="help-block missing" >
+							            Missing&#33; Add Month.
+							        </span>
+							    </div>
+							</div> <!-- End - Month -->
+
+							<!-- Day -->
+							<div class="form-group group-ctrl" ng-class="{'has-error':form.day.$invalid}">
+							    <label for="day">Day:</label> <!-- class="control-label" --> 
+							    <div class="select-wrapper"> 
+							    	<div class="select-container">
+								        <select id="day" 
+								                name="day" 
+								                ng-model="dayItem"
+								                ng-options="dayItem as dayItem for dayItem in days" 
+								                value="{{dayItem.value}}"
+								                class="form-control" required>
+								            <option value="" >Select ... </option> <!-- ng-change="selectedOptionFn(day, dayItem.value);" -->
+								        </select> 
+								        <i class="fa fa-chevron-down" ></i>
+								    </div>
+								    <!-- Success -->
+								    <div ng-show="!form.day.$invalid" 
+								    		class="validity-icon" >
+				                    	<svg version="1.1" 
+				                    			xmlns="http://www.w3.org/2000/svg" 
+				                    			viewBox="0 0 130.2 130.2">
+										  	<circle class="path circle" 
+										  			fill="none" 
+										  			stroke="#73AF55" 
+										  			stroke-width="6" 
+										  			stroke-miterlimit="10" 
+										  			cx="65.1" cy="65.1" r="62.1"/>
+									 	 	<polyline class="path check" 
+									 	 				fill="none" 
+									 	 				stroke="#73AF55" 
+									 	 				stroke-width="6" 
+									 	 				stroke-linecap="round" 
+									 	 				stroke-miterlimit="10" 
+									 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+										</svg>
+				                    </div>
+				                    <!-- Missing -->
+				                    <div ng-show="form.day.$invalid" 
+				                    	class="form-field-alert validity-icon missing" >
+
+				                    	<div class="form-field-icon form-field-warning scaleWarning">
+											<span class="form-field-body pulseWarningIns"></span>
+											<span class="form-field-dot pulseWarningIns"></span>
+										</div>
+				                    </div>
+							        <span ng-show="form.day.$invalid" class="help-block missing" >
+							            Missing&#33; Add Day.
+							        </span>
+							    </div>
+							</div> <!-- End - Day -->
+							
+							<!-- Year -->
+							<div class="form-group group-ctrl" ng-class="{'has-error':form.year.$invalid}">
+							    <label for="year">Year:</label> <!-- class="control-label" -->
+							    <div class="select-wrapper">
+							    	<div class="select-container">
+								        <select id="year" 
+								                name="year" 
+								                ng-model="yearItem"
+								                ng-options="yearItem as yearItem for yearItem in years" 
+								                value="{{yearItem.value}}"
+								                class="form-control" required>
+								            <option value="" >Select ... </option>  <!-- ng-change="selectedOptionFn(year, yearItem.value);" -->
+								        </select> 
+								        <i class="fa fa-chevron-down" ></i>
+								    </div>
+								    <!-- Success -->
+								    <div ng-show="!form.year.$invalid" class="validity-icon" >
+				                    	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+										  	<circle class="path circle" 
+										  			fill="none" 
+										  			stroke="#73AF55" 
+										  			stroke-width="6" 
+										  			stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+									 	 	<polyline class="path check" 
+									 	 				fill="none" 
+									 	 				stroke="#73AF55" 
+									 	 				stroke-width="6" 
+									 	 				stroke-linecap="round" 
+									 	 				stroke-miterlimit="10" 
+									 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+										</svg>
+				                    </div>
+				                    <!-- Missing -->
+				                    <div ng-show="form.year.$invalid" 
+				                    	class="form-field-alert validity-icon missing" >
+
+				                    	<div class="form-field-icon form-field-warning scaleWarning">
+											<span class="form-field-body pulseWarningIns"></span>
+											<span class="form-field-dot pulseWarningIns"></span>
+										</div>
+				                    </div>
+							        <span ng-show="form.year.$invalid" class="help-block missing" >
+							            Missing&#33; Add Year.
+							        </span>
+							    </div>
+							</div> <!-- End - Year -->
+						</div>
+						<!-- DOB - validation - all together -->
+						<div ng-show="!form.day.$invalid 
+							&& !form.month.$invalid 
+							&& !form.year.$invalid" 
+							class="validity-icon" >
+	                    	<svg version="1.1" 
+	                    			xmlns="http://www.w3.org/2000/svg" 
+	                    			viewBox="0 0 130.2 130.2">
+							  	<circle class="path circle" 
+							  			fill="none" 
+						  				stroke="#73AF55" 
+						  				stroke-width="6" 
+						  				stroke-miterlimit="10" 
+						  				cx="65.1" cy="65.1" r="62.1"/>
+						 	 	<polyline class="path check" 
+						 	 				fill="none" 
+						 	 				stroke="#73AF55" 
+						 	 				stroke-width="6" 
+						 	 				stroke-linecap="round" 
+						 	 				stroke-miterlimit="10" 
+						 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+							</svg>
+	                    </div>
+	                    <div ng-show="form.day.$invalid 
+							|| form.month.$invalid 
+							|| form.year.$invalid" 
+							class="form-field-alert validity-icon missing" >
+
+		                    	<div class="form-field-icon form-field-warning scaleWarning">
+									<span class="form-field-body pulseWarningIns"></span>
+									<span class="form-field-dot pulseWarningIns"></span>
+								</div>
+							<!-- class="validity-icon">
+	                		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+								<circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+								<line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
+								<line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
+							</svg> -->
+	                    </div>
+	                    <!-- End DOB - validation - all together -->
+					</div> <!-- End - DOB -->
+				</div> <!-- End - left fields -->
+
+				<!-- Right fields -->
+				<div class="group-ctrls">
+					<!-- Phone -->
+					<div class="form-group group-ctrl" 
+						ng-class="{ 'has-error': !form.phone.$pristine && form.phone.$error.required 
+								|| (form.phone.$pristine && form.phone.$error.required) || form.phone.$error.pattern }">
+	                    <label for="phone">Phone</label>
+	                    <input type="text" 
+	                    		name="phone" 
+	                    		id="phone" 
+	                    		placeholder="0700000000" 
+	                    		ng-pattern="phoneNumber" 
+	                    		class="form-control text-field" 
+	                    		ng-model="vm.phone" required />
+	                    <!-- Success -->
+	                    <div ng-show="(!form.phone.$pristine 
+	                    			&& !form.phone.$error.required 
+	                    			&& !form.phone.$error.pattern) 
+	                    			|| (!form.phone.$error.required 
+	                    			&& !form.phone.$error.pattern)" 
+            				class="validity-icon" >
+	                    	<svg version="1.1" 
+	                    			xmlns="http://www.w3.org/2000/svg" 
+	                    			viewBox="0 0 130.2 130.2">
+							  	<circle class="path circle" 
+							  			fill="none" 
+							  			stroke="#73AF55" 
+							  			stroke-width="6" 
+							  			stroke-miterlimit="10" 
+							  			cx="65.1" cy="65.1" r="62.1"/>
+						 	 	<polyline class="path check" 
+						 	 				fill="none" 
+						 	 				stroke="#73AF55" 
+						 	 				stroke-width="6" 
+						 	 				stroke-linecap="round" 
+						 	 				stroke-miterlimit="10" 
+						 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+							</svg>
+	                    </div>
+	                    <!-- Missing -->
+	                    <div ng-show="!form.phone.$pristine && form.phone.$error.required 
+	                    		|| (form.phone.$pristine && form.phone.$error.required)" 
+                    		class="form-field-alert validity-icon missing" > 
+
+	                    	<div class="form-field-icon form-field-warning scaleWarning">
+								<span class="form-field-body pulseWarningIns"></span>
+								<span class="form-field-dot pulseWarningIns"></span>
+							</div>
+	                    </div>
+	                    <span ng-show="!form.phone.$pristine && form.phone.$error.required 
+	                    		|| (form.phone.$pristine && form.phone.$error.required)" 
+	                    	class="help-block missing">Missing&#33; Add Phone</span>
+
+	                    <!-- Invalid -->
+	                    <div ng-show="!form.phone.$error.required && form.phone.$error.pattern" 
+	                    		class="form-field-alert validity-icon invalid" >
+		                    <div class="form-field-icon form-field-warning scaleWarning">
+								<span class="form-field-body pulseWarningIns"></span>
+								<span class="form-field-dot pulseWarningIns"></span>
+							</div>
+						</div>
+	                    <!-- Invalid Error message -->				
+	                    <span ng-show="!form.phone.$error.required && form.phone.$error.pattern" class="help-block invalid">
+	                    	Invalid&#33; re-confirm
+	                    </span>
+
+	                </div> <!-- End - Phone -->
+
+	                <!-- Mobile -->
+	                <div class="form-group group-ctrl" 
+	                	ng-class="{ 'has-error': !form.mobile.$pristine && form.mobile.$error.required 
+	                			|| (form.mobile.$pristine && form.mobile.$error.required) || form.mobile.$error.pattern }">
+	                    <label for="mobile">Mobile</label>
+	                    <input id="mobile" 
+	                    		name="mobile" 
+	                    		type="text"  
+	                    		placeholder="0400000000" 
+	                    		ng-pattern="mobileNumber" 
+	                    		ng-model="vm.mobile" 
+	                    		class="form-control text-field" required />
+	                    <!-- Success -->
+	                    <div ng-show="(!form.mobile.$pristine 
+	                    			&& !form.mobile.$error.required 
+	                    			&& !form.mobile.$error.pattern) 
+	                    			|| (!form.mobile.$error.required 
+	                    			&& !form.mobile.$error.pattern)" 
+	                    			class="validity-icon" >
+	                    	<!-- <svg version="1.1" 
+	                    		xmlns="http://www.w3.org/2000/svg" 
+	                    		viewBox="0 0 130.2 130.2">
+							  	<circle class="path circle" 
+							  			fill="none" 
+							  			stroke="#73AF55" 
+							  			stroke-width="6" 
+							  			stroke-miterlimit="10" 
+							  			cx="65.1" cy="65.1" r="62.1"/>
+						 	 	<polyline class="path check" 
+						 	 			fill="none" stroke="#73AF55" 
+						 	 			stroke-width="6" 
+						 	 			stroke-linecap="round" 
+						 	 			stroke-miterlimit="10" 
+						 	 			points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+							</svg> -->
+
+							<i class="fa fa-check-circle"></i>
+	                    </div>
+
+	                    <!-- Missing -->
+	                    <div ng-show="!form.mobile.$pristine && form.mobile.$error.required 
+	                    			|| (form.mobile.$pristine && form.mobile.$error.required)" 
+	                    	class="form-field-alert validity-icon missing" >
+
+	                    	<i class="fa fa-exclamation-circle"></i>
+
+	                    	<!-- <div class="form-field-icon form-field-warning scaleWarning">
+								<span class="form-field-body pulseWarningIns"></span>
+								<span class="form-field-dot pulseWarningIns"></span>
+							</div> -->
+	                    </div>
+	                    <span ng-show="!form.mobile.$pristine && form.mobile.$error.required 
+	                    		|| (form.mobile.$pristine && form.mobile.$error.required)" 
+                    			class="help-block missing">Missing&#33; Add Mobile</span>
+
+                    	<!-- Invalid -->
+	                    <div ng-show="!form.mobile.$error.required && form.mobile.$error.pattern" 
+	                    		class="form-field-alert validity-icon invalid" >
+	                    		<i class="fa fa-times-circle"></i>
+		                    <!-- <div class="form-field-icon form-field-warning scaleWarning">
+								<span class="form-field-body pulseWarningIns"></span>
+								<span class="form-field-dot pulseWarningIns"></span>
+							</div> -->
+						</div>
+	                    <!-- Invalid Error message -->				
+	                    <span ng-show="!form.mobile.$error.required && form.mobile.$error.pattern" class="help-block invalid">
+	                    	Invalid&#33; re-confirm
+	                    </span>
+	                </div> <!-- End - Mobile -->
+
+	                <!-- Email -->
+	                <div class="form-group group-ctrl" 
+	                	ng-class="{ 'has-error': !form.email.$pristine && !form.email.$valid
+	                			|| (form.email.$pristine && form.email.$error.required) }">
+
+	                			<!-- ng-class="{ 'has-error': !form.phone.$pristine && form.phone.$error.required 
+								|| (form.phone.$pristine && form.phone.$error.required) || form.phone.$error.pattern }" -->
+
+	                    <label for="email">Email</label>
+	                    <input type="email" 
+	                    		name="email" 
+	                    		id="email" 
+	                    		placeholder="ellie@gmail.com" 
+	                    		class="form-control text-field"
+	                    		ng-pattern="emailValidation"  
+	                    		ng-model="vm.email" required />
+	                    <!-- Success -->
+	                    <div ng-show="(!form.email.$pristine && !form.email.$error.required && form.email.$valid)|| form.email.$valid" class="validity-icon" >
+	                    	<svg version="1.1" 
+	                    		xmlns="http://www.w3.org/2000/svg" 
+	                    		viewBox="0 0 130.2 130.2">
+							  	<circle class="path circle" 
+							  			fill="none" 
+							  			stroke="#73AF55" 
+							  			stroke-width="6" 
+							  			stroke-miterlimit="10" 
+							  			cx="65.1" cy="65.1" r="62.1"/>
+						 	 	<polyline class="path check" 
+						 	 				fill="none" 
+						 	 				stroke="#73AF55" 
+						 	 				stroke-width="6" 
+						 	 				stroke-linecap="round" 
+						 	 				stroke-miterlimit="10" 
+						 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+							</svg>
+	                    </div>
+	                    <!-- Missing -->
+	                    <div ng-show="!form.email.$pristine && form.email.$error.required 
+	                    			|| (form.email.$pristine && form.email.$error.required)" 
+	                    	class="form-field-alert validity-icon missing" >
+
+	                    	<div class="form-field-icon form-field-warning scaleWarning">
+								<span class="form-field-body pulseWarningIns"></span>
+								<span class="form-field-dot pulseWarningIns"></span>
+							</div>
+	                    </div> 
+	                    <span ng-show="!form.email.$pristine && form.email.$error.required 
+	                    			|| (form.email.$pristine && form.email.$error.required)" 
+                    			class="help-block missing">Missing&#33; Add Email</span>
+                    	<!-- Invalid -->
+	                    <div ng-show="!form.email.$error.required && !form.email.$valid" 
+	                    		class="form-field-alert validity-icon invalid" >
+		                    <div class="form-field-icon form-field-warning scaleWarning">
+								<span class="form-field-body pulseWarningIns"></span>
+								<span class="form-field-dot pulseWarningIns"></span>
+							</div>
+						</div>
+	                    <!-- Invalid Error message -->				
+	                    <span ng-show="!form.email.$error.required && !form.email.$valid" class="help-block invalid">
+	                    	Invalid&#33; re-confirm
+	                    </span>
+	                </div> <!-- End - Email -->
+
+	                <!-- Address -->
+	                <div class="form-group group-ctrl address" 
+	                	ng-class="{ 'has-error': !form.address.$pristine && form.address.$error.required 
+								|| (form.address.$pristine && form.address.$error.required) || (form.address.$dirty && form.address.$invalid) }">
+
+	                    <label for="address">Address</label>
+	                    <label for="addressCheckbox" class="address-btn">Manual
+	                    	<input id="addressCheckbox" 
+	                    			name="addressCheckbox" 
+	                    			type="checkbox" 
+	                    			ng-model="vm.addressCheckbox" 
+	                    			ng-click="vm.setAddressFields(vm.address.components.country, vm.address.components.state)" 
+	                    			class="addressCheckbox" />
+	                    </label>
+
+	                    <div ng-if="!vm.addressCheckbox" >
+		                    <input vs-google-autocomplete="options"
+                					vs-autocomplete-validator="vs-street-address"
+                 					type="text" 
+		                    		name="address" 
+		                    		id="address" 
+		                    		placeholder="Enter address" 
+		                    		ng-model="vm.address.name" 
+									vs-place="vm.address.place" 
+									vs-place-id="vm.address.components.placeId"
+									vs-unit-number="vm.address.components.unitNumber" 
+									vs-street-number="vm.address.components.streetNumber" 
+									vs-street="vm.address.components.street" 
+									vs-addressLine2="vm.address.components.addressLine2" 
+									vs-suburb="vm.address.components.suburb"
+									vs-city="vm.address.components.city" 
+									vs-post-code="vm.address.components.postCode"
+									vs-state="vm.address.components.state"
+									vs-country-short="vm.address.components.countryCode"
+									vs-country="vm.address.components.country"
+									vs-district="vm.address.components.district"
+									vs-latitude="vm.address.components.location.lat"
+									vs-longitude="vm.address.components.location.long" 
+									class="form-control text-field" required />
+
+		                    <!-- Success -->
+		                    <div ng-show="(!form.address.$pristine && !form.address.$error.required && form.address.$valid) 
+		                    			|| form.address.$valid" class="validity-icon" >
+		                    	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+								  	<circle class="path circle" 
+								  		fill="none" 
+								  		stroke="#73AF55" 
+								  		stroke-width="6" 
+								  		stroke-miterlimit="10" 
+								  		cx="65.1" cy="65.1" r="62.1"/>
+							 	 	<polyline class="path check" 
+							 	 		fill="none" stroke="#73AF55" 
+							 	 		stroke-width="6" 
+							 	 		stroke-linecap="round" 
+							 	 		stroke-miterlimit="10" 
+							 	 		points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+								</svg>
+		                    </div>
+
+		                    <!-- Missing -->
+		                    <div ng-show="!form.address.$pristine && form.address.$error.required 
+		                    		|| (form.address.$pristine && form.address.$error.required)" 
+		                    		class="form-field-alert validity-icon missing" >
+
+		                    	<div class="form-field-icon form-field-warning scaleWarning">
+									<span class="form-field-body pulseWarningIns"></span>
+									<span class="form-field-dot pulseWarningIns"></span>
+								</div>
+		                    </div>
+		                    <!-- Missing Error message -->
+		                    <span ng-show="!form.address.$pristine && form.address.$error.required 
+		                    		|| (form.address.$pristine && form.address.$error.required)" class="help-block missing">Missing&#33; Add Address</span>
+
+		                    <!-- Invalid -->
+		                    <div ng-show="!form.address.$error.required && form.address.$invalid" 
+		                    		class="form-field-alert validity-icon invalid" >
+			                    <div class="form-field-icon form-field-warning scaleWarning">
+									<span class="form-field-body pulseWarningIns"></span>
+									<span class="form-field-dot pulseWarningIns"></span>
+								</div>
+							</div>
+		                    <!-- Invalid Error message -->				
+		                    <span ng-show="!form.address.$error.required && form.address.$invalid" class="help-block invalid">
+		                    	Invalid&#33; re-confirm
+		                    </span>
+		                </div>
+
+	                    <!-- Address - separate fields -->
+                        <div ng-if="vm.addressCheckbox" >
+
+                        	<!-- unit Number -->
+                    		<div class="inner-group-ctrls">
+								<div class="form-group group-ctrl" 
+				                		ng-class="{ 'has-error': !form.unitNumber.$pristine && form.unitNumber.$error.required 
+											|| (form.unitNumber.$pristine && form.unitNumber.$error.required) }">
+				                    <label for="unitNumber">Unit Number</label>
+				                    <input type="text" 
+				                    		name="unitNumber" 
+				                    		id="unitNumber" 
+				                    		placeholder="Unit Number" 
+				                    		class="form-control text-field" 
+				                    		ng-model="vm.address.components.unitNumber" required />
+
+				                    <!-- Success -->
+				                    <div ng-show="(!form.unitNumber.$pristine 
+				                    			&& !form.unitNumber.$error.required) 
+				                    			|| !form.unitNumber.$error.required" class="validity-icon" >
+				                    	<svg version="1.1" 
+				                    			xmlns="http://www.w3.org/2000/svg" 
+				                    			viewBox="0 0 130.2 130.2">
+										  	<circle class="path circle" 
+										  			fill="none" 
+										  			stroke="#73AF55" 
+										  			stroke-width="6" 
+										  			stroke-miterlimit="10" 
+										  			cx="65.1" cy="65.1" r="62.1"/>
+									 	 	<polyline class="path check" 
+									 	 				fill="none" stroke="#73AF55" 
+									 	 				stroke-width="6" 
+									 	 				stroke-linecap="round" 
+									 	 				stroke-miterlimit="10" 
+									 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+										</svg>
+				                    </div>
+
+				                    <!-- Missing -->
+				                    <div ng-show="!form.unitNumber.$pristine && form.unitNumber.$error.required 
+				                    		|| (form.unitNumber.$pristine && form.unitNumber.$error.required)" 
+				                    		class="form-field-alert validity-icon missing" >
+
+				                    	<div class="form-field-icon form-field-warning scaleWarning">
+											<span class="form-field-body pulseWarningIns"></span>
+											<span class="form-field-dot pulseWarningIns"></span>
+										</div>
+				                    </div>
+				                    <span ng-show="!form.unitNumber.$pristine && form.unitNumber.$error.required 
+				                    		|| (form.unitNumber.$pristine && form.unitNumber.$error.required)" 
+				                    		class="help-block missing">Missing&#33; Add Unit Number</span>
+				                </div>
+							</div> <!-- End - Unit Number -->
+
+							<!-- Street Number -->
+							<div class="inner-group-ctrls">
+								<div class="form-group group-ctrl" 
+				                		ng-class="{ 'has-error': !form.streetNumber.$pristine && form.streetNumber.$error.required 
+											|| (form.streetNumber.$pristine && form.streetNumber.$error.required) }">
+				                    <label for="streetNumber">Street Number</label>
+				                    <input type="text" 
+				                    		name="streetNumber" 
+				                    		id="streetNumber" 
+				                    		placeholder="Street Number" 
+				                    		class="form-control text-field" 
+				                    		ng-model="vm.address.components.streetNumber" required />
+				                    <!-- Success -->
+				                    <div ng-show="(!form.streetNumber.$pristine 
+				                    			&& !form.streetNumber.$error.required) 
+				                    			|| !form.streetNumber.$error.required" class="validity-icon" >
+				                    	<svg version="1.1" 
+				                    			xmlns="http://www.w3.org/2000/svg" 
+				                    			viewBox="0 0 130.2 130.2">
+										  	<circle class="path circle" 
+										  			fill="none" 
+										  			stroke="#73AF55" 
+										  			stroke-width="6" 
+										  			stroke-miterlimit="10" 
+										  			cx="65.1" cy="65.1" r="62.1"/>
+									 	 	<polyline class="path check" 
+									 	 				fill="none" stroke="#73AF55" 
+									 	 				stroke-width="6" 
+									 	 				stroke-linecap="round" 
+									 	 				stroke-miterlimit="10" 
+									 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+										</svg>
+				                    </div>
+
+				                    <!-- Missing -->
+				                    <div ng-show="!form.streetNumber.$pristine && form.streetNumber.$error.required 
+				                    		|| (form.streetNumber.$pristine && form.streetNumber.$error.required)" 
+				                    		class="form-field-alert validity-icon missing" >
+
+				                    	<div class="form-field-icon form-field-warning scaleWarning">
+											<span class="form-field-body pulseWarningIns"></span>
+											<span class="form-field-dot pulseWarningIns"></span>
+										</div>
+				                    </div>
+				                    <span ng-show="!form.streetNumber.$pristine && form.streetNumber.$error.required 
+				                    		|| (form.streetNumber.$pristine && form.streetNumber.$error.required)" 
+				                    		class="help-block missing">Missing&#33; Add Street Number</span>
+				                </div>
+							</div> <!-- End - Street Number -->
+							<div class="inner-2col-group-ctrls">
+	                        	<!-- Street Name -->
+	                        	<div class="inner-group-ctrls">
+		                        	<div class="form-group group-ctrl" 
+					                		ng-class="{ 'has-error': !form.streetName.$pristine && form.streetName.$error.required 
+												|| (form.streetName.$pristine && form.streetName.$error.required) }">
+					                    <label for="streetName">Street Name</label>
+					                    <input type="text" 
+					                    		name="streetName" 
+					                    		id="streetName" 
+					                    		placeholder="Street Name" 
+					                    		class="form-control text-field" 
+					                    		ng-model="vm.address.components.street" required />
+					                    <!-- Success -->
+					                    <div ng-show="(!form.streetName.$pristine 
+					                    			&& !form.streetName.$error.required) 
+					                    			|| !form.streetName.$error.required" class="validity-icon" >
+					                    	<svg version="1.1" 
+					                    			xmlns="http://www.w3.org/2000/svg" 
+					                    			viewBox="0 0 130.2 130.2">
+											  	<circle class="path circle" 
+											  			fill="none" 
+											  			stroke="#73AF55" 
+											  			stroke-width="6" 
+											  			stroke-miterlimit="10" 
+											  			cx="65.1" cy="65.1" r="62.1"/>
+										 	 	<polyline class="path check" 
+										 	 				fill="none" stroke="#73AF55" 
+										 	 				stroke-width="6" 
+										 	 				stroke-linecap="round" 
+										 	 				stroke-miterlimit="10" 
+										 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+											</svg>
+					                    </div>
+
+					                     <!-- Missing -->
+					                    <div ng-show="!form.streetName.$pristine && form.streetName.$error.required 
+					                    		|| (form.streetName.$pristine && form.streetName.$error.required)" 
+					                    		class="form-field-alert validity-icon missing" >
+
+					                    	<div class="form-field-icon form-field-warning scaleWarning">
+												<span class="form-field-body pulseWarningIns"></span>
+												<span class="form-field-dot pulseWarningIns"></span>
+											</div>
+					                    </div>
+					                    <span ng-show="!form.streetName.$pristine && form.streetName.$error.required 
+					                    		|| (form.streetName.$pristine && form.streetName.$error.required)" 
+					                    		class="help-block missing">Missing&#33; Add Street Name</span>
+					                </div> 
+					            </div> <!-- End - Street Name -->
+
+	                        	<!-- Address Line 2 -->
+	                        	<div class="inner-group-ctrls">
+		                        	<div class="form-group group-ctrl" 
+					                		ng-class="{ 'has-error': !form.addressLine2.$pristine && form.addressLine2.$error.required 
+												|| (form.addressLine2.$pristine && form.addressLine2.$error.required) }">
+					                    <label for="addressLine2">Address Line 2</label>
+					                    <input type="text" 
+					                    		name="addressLine2" 
+					                    		id="addressLine2" 
+					                    		placeholder="Address Line2" 
+					                    		class="form-control text-field" 
+					                    		ng-model="vm.address.components.addressLine2" required />
+
+					                    <!-- Success -->
+					                    <div ng-show="(!form.addressLine2.$pristine 
+					                    			&& !form.addressLine2.$error.required) 
+					                    			|| !form.addressLine2.$error.required" class="validity-icon" >
+					                    	<svg version="1.1" 
+					                    			xmlns="http://www.w3.org/2000/svg" 
+					                    			viewBox="0 0 130.2 130.2">
+											  	<circle class="path circle" 
+											  			fill="none" 
+											  			stroke="#73AF55" 
+											  			stroke-width="6" 
+											  			stroke-miterlimit="10" 
+											  			cx="65.1" cy="65.1" r="62.1"/>
+										 	 	<polyline class="path check" 
+										 	 				fill="none" stroke="#73AF55" 
+										 	 				stroke-width="6" 
+										 	 				stroke-linecap="round" 
+										 	 				stroke-miterlimit="10" 
+										 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+											</svg>
+					                    </div>
+
+					                     <!-- Missing -->
+					                    <div ng-show="!form.addressLine2.$pristine && form.addressLine2.$error.required 
+					                    		|| (form.addressLine2.$pristine && form.addressLine2.$error.required)" 
+					                    		class="form-field-alert validity-icon missing" >
+
+					                    	<div class="form-field-icon form-field-warning scaleWarning">
+												<span class="form-field-body pulseWarningIns"></span>
+												<span class="form-field-dot pulseWarningIns"></span>
+											</div>
+					                    </div>
+					                    <span ng-show="!form.addressLine2.$pristine && form.addressLine2.$error.required 
+					                    		|| (form.addressLine2.$pristine && form.addressLine2.$error.required)" 
+					                    		class="help-block missing">Missing&#33; Add Address Line 2</span>
+					                </div>
+				                </div> <!-- End - Address Line 2 -->
+				            </div> <!-- End - inner-2col-group-ctrls -->
+
+			                <!-- Suburb,Town/City and Postcode -->
+                    		<div class="inner-3col-group-ctrls">
+                    			<div class="inner-3col-container">
+	                    			<!-- Suburb -->
+									<div class="form-group group-ctrl" 
+					                		ng-class="{ 'has-error': !form.suburb.$pristine && form.suburb.$error.required 
+											|| (form.suburb.$pristine && form.suburb.$error.required) }"> <!-- !form.suburb.$pristine && form.suburb.$error.required 
+												|| (form.suburb.$pristine && form.suburb.$error.required) -->
+					                    <label for="suburb">Suburb</label>
+					                    <input type="text" 
+					                    		name="suburb" 
+					                    		id="suburb" 
+					                    		placeholder="Suburb" 
+					                    		class="form-control text-field" 
+					                    		ng-model="vm.address.components.suburb" required />
+
+					                    <!-- Success -->
+					                    <div ng-show="(!form.suburb.$pristine 
+				                    			&& !form.suburb.$error.required) 
+				                    			|| !form.suburb.$error.required" class="validity-icon" > <!-- (!form.suburb.$pristine 
+					                    			&& !form.suburb.$error.required) 
+					                    			|| !form.suburb.$error.required -->
+					                    	<svg version="1.1" 
+					                    			xmlns="http://www.w3.org/2000/svg" 
+					                    			viewBox="0 0 130.2 130.2">
+											  	<circle class="path circle" 
+											  			fill="none" 
+											  			stroke="#73AF55" 
+											  			stroke-width="6" 
+											  			stroke-miterlimit="10" 
+											  			cx="65.1" cy="65.1" r="62.1"/>
+										 	 	<polyline class="path check" 
+										 	 				fill="none" stroke="#73AF55" 
+										 	 				stroke-width="6" 
+										 	 				stroke-linecap="round" 
+										 	 				stroke-miterlimit="10" 
+										 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+											</svg>
+					                    </div>
+
+					                     <!-- Missing -->
+					                    <div ng-show="!form.suburb.$pristine && form.suburb.$error.required 
+				                    		|| (form.suburb.$pristine && form.suburb.$error.required)" 
+					                    		class="form-field-alert validity-icon missing" > <!-- !form.suburb.$pristine && form.suburb.$error.required 
+					                    		|| (form.suburb.$pristine && form.suburb.$error.required) -->
+
+					                    	<div class="form-field-icon form-field-warning scaleWarning">
+												<span class="form-field-body pulseWarningIns"></span>
+												<span class="form-field-dot pulseWarningIns"></span>
+											</div>
+					                    </div>
+					                    <span ng-show="!form.suburb.$pristine && form.suburb.$error.required 
+				                    		|| (form.suburb.$pristine && form.suburb.$error.required)" 
+					                    		class="help-block missing">Missing&#33; Add Suburb</span> <!-- !form.suburb.$pristine && form.suburb.$error.required 
+					                    		|| (form.suburb.$pristine && form.suburb.$error.required) -->
+					                </div> <!-- End - Suburb -->
+
+									<!-- Town/City -->
+									<div class="form-group group-ctrl" 
+					                		ng-class="{ 'has-error': !form.townOrCity.$pristine && form.townOrCity.$error.required 
+												|| (form.townOrCity.$pristine && form.townOrCity.$error.required) }">
+					                    <label for="townOrCity">Town/City</label>
+					                    <input type="text" 
+					                    		name="townOrCity" 
+					                    		id="townOrCity" 
+					                    		placeholder="" 
+					                    		class="form-control text-field" 
+					                    		ng-model="vm.address.components.city" required />
+					                    <!-- Success -->
+					                    <div ng-show="(!form.townOrCity.$pristine 
+					                    			&& !form.townOrCity.$error.required) 
+					                    			|| !form.townOrCity.$error.required" class="validity-icon" >
+					                    	<svg version="1.1" 
+					                    			xmlns="http://www.w3.org/2000/svg" 
+					                    			viewBox="0 0 130.2 130.2">
+											  	<circle class="path circle" 
+											  			fill="none" 
+											  			stroke="#73AF55" 
+											  			stroke-width="6" 
+											  			stroke-miterlimit="10" 
+											  			cx="65.1" cy="65.1" r="62.1"/>
+										 	 	<polyline class="path check" 
+										 	 				fill="none" stroke="#73AF55" 
+										 	 				stroke-width="6" 
+										 	 				stroke-linecap="round" 
+										 	 				stroke-miterlimit="10" 
+										 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+											</svg>
+					                    </div>
+
+					                     <!-- Missing -->
+					                    <div ng-show="!form.townOrCity.$pristine && form.townOrCity.$error.required 
+					                    		|| (form.townOrCity.$pristine && form.townOrCity.$error.required)" 
+					                    		class="form-field-alert validity-icon missing" >
+
+					                    	<div class="form-field-icon form-field-warning scaleWarning">
+												<span class="form-field-body pulseWarningIns"></span>
+												<span class="form-field-dot pulseWarningIns"></span>
+											</div>
+					                    </div>
+					                    <span ng-show="!form.townOrCity.$pristine && form.townOrCity.$error.required 
+					                    		|| (form.townOrCity.$pristine && form.townOrCity.$error.required)" 
+					                    		class="help-block missing">Missing&#33; Add Town/City</span>
+					                </div> <!-- End - Town/City -->
+
+									<!-- Postcode -->
+									<div class="form-group group-ctrl" 
+					                		ng-class="{ 'has-error': !form.postcode.$pristine && form.postcode.$error.required 
+												|| (form.postcode.$pristine && form.postcode.$error.required) }">
+					                    <label for="postcode">Postcode</label>
+					                    <input type="text" 
+					                    		name="postcode" 
+					                    		id="postcode" 
+					                    		placeholder="" 
+					                    		class="form-control text-field" 
+					                    		ng-model="vm.address.components.postcode" required />
+					                    <!-- Success -->
+					                    <div ng-show="(!form.postcode.$pristine 
+					                    			&& !form.postcode.$error.required) 
+					                    			|| !form.postcode.$error.required" class="validity-icon" >
+					                    	<svg version="1.1" 
+					                    			xmlns="http://www.w3.org/2000/svg" 
+					                    			viewBox="0 0 130.2 130.2">
+											  	<circle class="path circle" 
+											  			fill="none" 
+											  			stroke="#73AF55" 
+											  			stroke-width="6" 
+											  			stroke-miterlimit="10" 
+											  			cx="65.1" cy="65.1" r="62.1"/>
+										 	 	<polyline class="path check" 
+										 	 				fill="none" stroke="#73AF55" 
+										 	 				stroke-width="6" 
+										 	 				stroke-linecap="round" 
+										 	 				stroke-miterlimit="10" 
+										 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+											</svg>
+					                    </div>
+
+					                    <!-- Missing -->
+					                    <div ng-show="!form.postcode.$pristine && form.postcode.$error.required 
+					                    		|| (form.postcode.$pristine && form.postcode.$error.required)" 
+					                    		class="form-field-alert validity-icon missing" >
+
+					                    	<div class="form-field-icon form-field-warning scaleWarning">
+												<span class="form-field-body pulseWarningIns"></span>
+												<span class="form-field-dot pulseWarningIns"></span>
+											</div>
+					                    </div>
+					                    <span ng-show="!form.postcode.$pristine && form.postcode.$error.required 
+					                    		|| (form.postcode.$pristine && form.postcode.$error.required)" 
+					                    		class="help-block missing">Missing&#33; Add Postcode</span>
+					                </div> <!-- End - Postcode -->
+					            </div>
+
+					            <!-- Suburb,Town/City and Postcode - validation - alltogether -->
+					            <!-- Success -->
+				                <div ng-show="!form.suburb.$invalid 
+									&& !form.townOrCity.$invalid 
+									&& !form.postcode.$invalid" 
+									class="validity-icon" >
+			                    	<svg version="1.1" 
+			                    			xmlns="http://www.w3.org/2000/svg" 
+			                    			viewBox="0 0 130.2 130.2">
+									  	<circle class="path circle" 
+									  			fill="none" 
+								  				stroke="#73AF55" 
+								  				stroke-width="6" 
+								  				stroke-miterlimit="10" 
+								  				cx="65.1" cy="65.1" r="62.1"/>
+								 	 	<polyline class="path check" 
+								 	 				fill="none" 
+								 	 				stroke="#73AF55" 
+								 	 				stroke-width="6" 
+								 	 				stroke-linecap="round" 
+								 	 				stroke-miterlimit="10" 
+								 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+									</svg>
+			                    </div>
+			                    <!-- Missing -->
+			                    <div ng-show="form.suburb.$invalid 
+									|| form.townOrCity.$invalid 
+									|| form.postcode.$invalid" 
+									class="form-field-alert validity-icon missing" >
+
+				                    	<div class="form-field-icon form-field-warning scaleWarning">
+											<span class="form-field-body pulseWarningIns"></span>
+											<span class="form-field-dot pulseWarningIns"></span>
+										</div>
+			                    </div>  <!-- End - Suburb,Town/City and Postcode - validation - alltogether -->
+			                </div> <!-- End - Suburb,Town/City and Postcode -->
+
+			                <div class="inner-2col-group-ctrls">
+								<!-- State/Region, Country -->
+								<div class="inner-group-ctrls">
+				                	<!-- State/Region -->
+									<div class="form-group group-ctrl" ng-class="{'has-error':form.stateOrRegion.$invalid}">
+									    <label for="stateOrRegion">State/Region:</label> <!-- class="control-label" --> 
+									    <div class="select-wrapper">
+									    	<div class="select-container">
+										        <select id="stateOrRegion" 
+										                name="stateOrRegion" 
+										                ng-model="vm.address.components.state"
+										                ng-options="stateOrRegionItem as stateOrRegionItem.label for stateOrRegionItem in statesOrRegions" 
+										                value="{{vm.address.components.state}}" 
+										                ng-change="selectedOptionFn(statesOrRegions, vm.address.components.state.value);" 
+										                class="form-control" required >
+											            <option value="" >Select ... </option>
+										        </select> 
+										        <i class="fa fa-chevron-down" ></i>
+										    </div>
+
+										    <!-- Success -->
+										    <div ng-show="!form.stateOrRegion.$invalid" class="validity-icon">
+						                    	<svg version="1.1" 
+						                    			xmlns="http://www.w3.org/2000/svg" 
+						                    			viewBox="0 0 130.2 130.2">
+												  	<circle class="path circle" 
+												  			fill="none" 
+												  			stroke="#73AF55" 
+												  			stroke-width="6" 
+												  			stroke-miterlimit="10" 
+												  			cx="65.1" cy="65.1" r="62.1"/>
+											 	 	<polyline class="path check" 
+											 	 				fill="none" 
+											 	 				stroke="#73AF55" 
+											 	 				stroke-width="6" 
+											 	 				stroke-linecap="round" 
+											 	 				stroke-miterlimit="10" 
+											 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+												</svg>
+						                    </div>
+
+						                    <!-- Missing -->
+						                    <div ng-show="form.stateOrRegion.$invalid" 
+						                    	class="form-field-alert validity-icon missing" >
+
+						                    	<div class="form-field-icon form-field-warning scaleWarning">
+													<span class="form-field-body pulseWarningIns"></span>
+													<span class="form-field-dot pulseWarningIns"></span>
+												</div>
+						                    </div>
+									        <span ng-show="form.stateOrRegion.$invalid" class="help-block missing" >
+									            Missing&#33; Add State/Region.
+									        </span>
+									    </div>
+									</div> <!-- End - State/Region -->
+								</div> 
+									
+								<div class="inner-group-ctrls">
+									<!-- Country -->
+									<div class="form-group group-ctrl" ng-class="{'has-error':form.country.$invalid}">
+									    <label for="country">Country:</label> <!-- class="control-label" -->
+									    <div class="select-wrapper">
+									    	<div class="select-container">
+										        <select id="country" 
+										                name="country" 
+										                ng-model="vm.address.components.country"
+										                ng-options="countryItem as countryItem.label for countryItem in countries" 
+										                value="{{vm.address.components.country}}"
+										                ng-change="selectedOptionFn(countries, vm.address.components.country.value);"
+										                class="form-control" required>
+										            <option value="" >Select ... </option>  
+										        </select> 
+										        <i class="fa fa-chevron-down" ></i>
+										    </div>
+
+										    <!-- Success -->
+										    <div ng-show="!form.country.$invalid" class="validity-icon" >
+						                    	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+												  	<circle class="path circle" 
+												  			fill="none" 
+												  			stroke="#73AF55" 
+												  			stroke-width="6" 
+												  			stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+											 	 	<polyline class="path check" 
+											 	 				fill="none" 
+											 	 				stroke="#73AF55" 
+											 	 				stroke-width="6" 
+											 	 				stroke-linecap="round" 
+											 	 				stroke-miterlimit="10" 
+											 	 				points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+												</svg>
+						                    </div>
+
+						                    <!-- Missing -->
+						                    <div ng-show="form.country.$invalid" 
+						                    	class="form-field-alert validity-icon missing" >
+
+						                    	<div class="form-field-icon form-field-warning scaleWarning">
+													<span class="form-field-body pulseWarningIns"></span>
+													<span class="form-field-dot pulseWarningIns"></span>
+												</div>
+						                    </div>
+									        <span ng-show="form.country.$invalid" class="help-block missing" >
+									            Missing&#33; Add Country.
+									        </span>
+									    </div>
+									</div> <!-- End - Country -->
+								</div> 
+								<!-- End - State/Region, Country -->
+							</div> <!-- inner-2col-group-ctrls -->
+                        </div> <!-- End - Address - separate fields -->
+	                    
+	                </div> <!-- End - Address -->
+
+	                <!-- <div class="form-group group-ctrl" >
+	                	<button type="button" class="edit-btn">Manual</button>
+	                </div> -->
+					
+				</div> <!-- End - right fields -->
+
+				<!-- termsNCondition -->
+				<div class="form-group group-ctrl termsNCondition" 
+                		ng-class="{ 'has-error': !form.termsNCondition.$pristine && form.termsNCondition.$error.required 
+	                			|| (form.termsNCondition.$pristine && form.termsNCondition.$error.required) }">
+					<!-- <div class="form-group group-ctrl" > -->
+					<label for="termsNCondition" class="checkbox-container">Does member agree with new terms and agreements?
+					  <input id="termsNCondition" name="termsNCondition" type="checkbox" class="form-control" ng-model="vm.termsNCondition" required>
+					  <span class="checkmark"></span>
+					</label>
+
+					 <!-- Success -->
+	                    <div ng-show="!form.termsNCondition.$pristine && !form.termsNCondition.$error.required" class="validity-icon" >
+	                    	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+							  	<circle class="path circle" 
+							  		fill="none" 
+							  		stroke="#73AF55" 
+							  		stroke-width="6" 
+							  		stroke-miterlimit="10" 
+							  		cx="65.1" cy="65.1" r="62.1"/>
+						 	 	<polyline class="path check" 
+						 	 		fill="none" stroke="#73AF55" 
+						 	 		stroke-width="6" 
+						 	 		stroke-linecap="round" 
+						 	 		stroke-miterlimit="10" 
+						 	 		points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+							</svg>
+	                    </div>
+	                    <!-- Missing -->
+	                    <div ng-show="!form.termsNCondition.$pristine && form.termsNCondition.$error.required 
+	                    	|| (form.termsNCondition.$pristine && form.termsNCondition.$error.required)" 
+	                    		class="form-field-alert validity-icon missing" >
+
+	                    	<div class="form-field-icon form-field-warning scaleWarning">
+								<span class="form-field-body pulseWarningIns"></span>
+								<span class="form-field-dot pulseWarningIns"></span>
+							</div>
+	                    </div>
+	                    <span ng-show="!form.termsNCondition.$pristine && form.termsNCondition.$error.required 
+	                    			|| (form.termsNCondition.$pristine && form.termsNCondition.$error.required)" 
+	                    		class="help-block missing">Missing&#33; This is required.</span>
+				</div> <!-- END - termsNCondition -->
+
+				<div class="form-group group-ctrl" >
+                	<a href="#!/" 
+                		class="form-main-btn" 
+                		ng-disabled="form.$invalid" 
+                		ng-class="{'disabled inactiveLink': form.$invalid}" 
+                		ng-click="disabled(form.$invalid)">Save</a>
+                </div>
+
+			</form>
+		</div>
+	</section>
+	
+	<!-- footer -->
+	<div ng-controller="formController">
+	  	<div ng-include src="footer.url"></div>
+	  	<script type="text/ng-template" id="footer.view.html"></script>
+	</div> <!-- End - footer -->
+</div>

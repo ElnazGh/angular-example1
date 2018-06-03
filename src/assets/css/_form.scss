@@ -1,0 +1,206 @@
+.main-form {
+	display: block;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.group-ctrls, .inner-group-ctrls {
+    display: inline-block;
+    float: left;
+    width: 50%;
+}
+.group-ctrls {
+    padding: 40px 20px;
+}
+
+.group-ctrls label {
+    clear: both;
+    display: block;
+    font-size: 14px;
+    line-height: 1.875;
+    font-weight: 500;
+    margin: 0 0 5px;
+    text-align: left;
+    color: #5d5d5d;
+    outline: 0;
+}
+.select-wrapper {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.select-container {
+    position: relative;
+    display: inline-block;
+    float: left;
+    width: calc(100% - 45px);
+    height: auto;
+    overflow: hidden;
+    background-color: transparent;
+}
+.group-ctrl select {
+	display: block;
+	position: relative;
+    float: left;
+    clear: left;
+    width: 100%;
+    height: 43px;
+    font-size: 14px;
+    line-height: 1.2;
+    border: 1px solid #ddd;
+    padding: 0 15px;
+    color: #5d5d5d;
+    outline: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 3px;
+    transition-property: color, background-color, border;
+    transition-duration: 150ms;
+}
+
+.group-ctrl select + i {
+    position: absolute;
+    top: 17px;
+    right: 13px;
+    font-weight: 300;
+    font-size: 12px;
+    color: #999;
+}
+
+.group-ctrl input[type=email],
+ .group-ctrl input[type=password],
+  .group-ctrl input[type=text],
+   .group-ctrl input[type=number],
+     input[type=search] {
+	    position: relative;
+	    float: left;
+	    display: inline-block;
+	    width: 91%;
+	    height: 43px;
+}
+
+.page-content .group-ctrl .match, .page-content .group-ctrl .text-field, .page-content .group-ctrl select, .page-content .group-ctrl textarea, .page-content table input, .page-content table input[type=search] {
+    display: block;
+    float: left;
+    clear: left;
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.2;
+    border: 1px solid #ddd;
+    padding: 0 15px;
+    color: #5d5d5d;
+    outline: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 3px;
+    transition-property: color, background-color, border;
+    transition-duration: 150ms;
+}
+
+/* Error */
+.help-block {
+    clear: both;
+    display: block;
+    margin: 0;
+    text-align: left;
+}
+
+.has-error {
+    .form-control {
+        border-color: #ddd;
+
+        &:focus {
+            border-color: #ddd;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ccc;
+             box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ccc; 
+        }
+    }
+
+    .help-block.missing {
+        color: #FF7F00;
+    }
+}
+.alert-danger {
+    background-color: #faecec;
+}
+
+.has-error .help-block.missing {
+    color: #FF7F00;
+}
+.has-error .help-block.invalid {
+    color: #FF0000;
+    text-align: left;
+}
+
+/* Validation Icon */
+svg {
+    display: block;
+    width: 22px;
+    margin: 0;
+    padding: 0;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.form-field-alert.missing .fa {
+    font-size: 23px;
+	color: #FF7F00;
+}
+.form-field-alert.invalid .fa {
+	font-size: 23px;
+	color: #FF0000;
+}
+.validity-icon .fa {
+	font-size: 23px;
+    color: rgb(115, 175, 85);
+}
+.validity-icon,
+ .form-field-alert {
+    float: left;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin: 13px 0 0 12px;
+}
+
+.form-field-alert .form-field-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    box-sizing: content-box;
+    margin: 0px auto;
+    padding: 0;
+}
+
+.termsNCondition {
+    clear: both;
+    margin: 0px auto;
+    padding-top: 40px;
+    display: block;
+    width: 38%;
+    min-width: 440px;
+    height: auto;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+	.group-ctrls, .inner-group-ctrls {
+	    display: block;
+	    float: none;
+	    width: 100%;
+	}
+	.group-ctrl, .group-ctrls {
+	    position: relative;
+	    margin: 10px 0;
+	}
+	.group-ctrls {
+	    padding: 0 20px 0 0;
+	}
+}
