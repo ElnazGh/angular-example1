@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en" >
+   <head>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes"/>
+      <title> Elle - Web Design Brisbane | homepage | moreLayouts, blurb, imageCaption </title>
+      <meta name="robots" content="noindex, nofollow, nosnippet, noarchive" />
+      <meta name="googlebot" content="noodp" />
+      <meta name="slurp" content="noydir" />
+      <meta name="keywords" content="null" />
+      <meta name="description" content="null" />
+      <meta name="HandheldFriendly" content="false"/>
+      <meta name="format-detection" content="telephone=no"/>
+      <meta name="author" content="Elnaz Gharaee"/>
+      <meta name="icbm" content="-27.471084,153.015999"/>
+      <!-- style -->
+      <!-- favicon -->
+      <!-- <link rel="shortcut icon" type="image/x-icon"  href="images/favicon.ico" /> -->
+      <!-- scripts -->
+    <link rel="stylesheet" href="foundation/css/foundation-datepicker.min.css">
+
+      <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" /> -->
+
+      <!-- main JS -->
+      
+     <!--  <link rel="stylesheet" href="style.css" /> -->
+     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="foundation/js/foundation-datepicker.min.js"></script>
+      <script>
+      $(function () {
+        
+        // implementation of disabled form fields
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+        var checkin = $('#dpd1').fdatepicker({
+          onRender: function (date) {
+            return date.valueOf() < now.valueOf() ? 'disabled' : '';
+          }
+        }).on('changeDate', function (ev) {
+          if (ev.date.valueOf() > checkout.date.valueOf()) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 1);
+            checkout.update(newDate);
+          }
+          checkin.hide();
+          $('#dpd2')[0].focus();
+        }).data('datepicker');
+        var checkout = $('#dpd2').fdatepicker({
+          onRender: function (date) {
+            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+          }
+        }).on('changeDate', function (ev) {
+          checkout.hide();
+        }).data('datepicker');
+      });
+
+
+
+
+    </script>
+
+
+
+</head>
+
+<body>
+<h4 data-magellan-destination="deps-example">Dependent pickers</h4>
+          <a name="deps-example"></a>
+          <p>Disabling dates in the past and dependent disabling.</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Check in:
+                  <input type="text" class="span2" value="" id="dpd1">
+                </th>
+                <th>Check out:
+                  <input type="text" class="span2" value="" id="dpd2">
+                </th>
+              </  
+  </body>
+</html>

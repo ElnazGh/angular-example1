@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en">
+   <head>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes"/>
+      <title> Deloitte - Web Design Brisbane | homepage | moreLayouts, blurb, imageCaption </title>
+      <meta name="robots" content="noindex, nofollow, nosnippet, noarchive" />
+      <meta name="googlebot" content="noodp" />
+      <meta name="slurp" content="noydir" />
+      <meta name="keywords" content="null" />
+      <meta name="description" content="null" />
+      <meta name="HandheldFriendly" content="false"/>
+      <meta name="format-detection" content="telephone=no"/>
+      <meta name="author" content="Elnaz Gharaee"/>
+      <meta name="icbm" content="-27.471084,153.015999"/>
+      <!-- style -->
+      <link rel="stylesheet" type="text/css" href="css/main.css"/>
+      <link rel="stylesheet" type="text/css" href="css/mediaqueries.css"/>
+      <!-- favicon -->
+      <link rel="shortcut icon" type="image/x-icon"  href="images/deloitte-favicon.ico" />
+      <!-- scripts -->
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+
+      <!-- main JS -->
+      <script type="text/javascript" src="js/functions.js"></script>
+
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+
+      <!--<script src="js/controllers.js"></script>-->
+
+
+
+   </head>
+   <body>
+      <script>
+         var helloApp = angular.module("helloApp", []);
+         helloApp.controller("CompanyCtrl", function($scope, $http) {
+            $http.get('hotels.json').success(function(data, status, headers, config) {
+                  $scope.hotels = data;
+                }).error(function(data, status, headers, config) {
+                  // log error
+                });
+         // $scope.hotels = [
+         //                     { 'name':'Infosys Technologies',
+         //                      'employees': 125000,
+         //                      'country': 'Australia'},
+         //                      { 'name':'Cognizant Technologies',
+         //                         'employees': 100000,
+         //                         'country': 'Australia'},
+         //                         { 'name':'Wipro',
+         //                            'employees': 115000,
+         //                            'country': 'United Kingdom'},
+         //                            { 'name':'Tata Consultancy Services (TCS)',
+         //                               'employees': 150000,
+         //                               'country': 'Australia'},
+         //                               { 'name':'HCL Technologies',
+         //                                  'employees': 90000,
+         //                                  'country': 'Spain'},
+         //                     ];
+         $scope.addRow = function(){      
+            $scope.hotels.push({ 'name':$scope.name, 'price': $scope.price, 'rating': $scope.rating, 'country':$scope.country });
+            $scope.name='';
+            $scope.price='';
+            $scope.rating='';
+            $scope.country='';
+         };
+         $scope.removeRow = function(name){           
+               var index = -1;      
+               var comArr = eval( $scope.hotels );
+               for( var i = 0; i < comArr.length; i++ ) {
+                  if( comArr[i].name === name ) {
+                     index = i;
+                     break;
+                  }
+               }
+               if( index === -1 ) {
+                  alert( "Something gone wrong" );
+               }
+               $scope.hotels.splice( index, 1 );      
+            };
+         });
+         </script>
+   <!-- header starts -->
+   <header>
+      <a href="index.html" target="_self" title="Trivago" class="logo">
+         <img src="images/trivagoLogo.svg" width="100%" alt="Trivago Logo"/>
+      </a>
+      <!-- responsive nav bar -->
+      <div class="nav-bar">
+         <a href=""><span class="icon">Filters</span></a>
+      </div>
+      <!-- navigation -->
+      <nav>
+         <ul>
+            <li class="icon nav-bar-close"></li>
+            <li class="sub-menu">
+               <a href="#" class="icon">My Profile</a>
+               <!-- children nav -->
+               <ul class="children">
+                  <li><a href="">Log in</a></li>
+                  <li><a href="">Sign up</a></li>
+               </ul>
+            </li>
+            <li><a href="#">AUD</a></li>
+            <li><a href="#" class="icon heart-icon"></a></li>
+         </ul>
+      </nav> <!-- navigation end -->
+      
+   </header> <!-- header end -->
+      <section class="page-holder" ng-app="helloApp" ng-controller="CompanyCtrl">
+         <section class="search-section">
+            <div style="padding:20px 0px 60px 0px">
+               <span class="col-md-1" style="font-weight:bold">Search</span>
+               <span class="col-md-3">
+               <input type="text" class="form-control ng-valid ng-dirty" ng-model="searchKeyword">
+               </span>
+            </div>
+            <!-- Start - Date Range Filter -->
+            <form id="searchForm" method="post" action="index.html" >
+               <input id="check-in" name="check-in" type="date" placeholder="check-in" required="required">
+               <input id="check-out" name="check-out" type="date" placeholder="check-out" required="required">
+
+            </form>
+            <!-- End - Date Range Filter -->
+         </section>
+         <section id="search-container" >
+
+            <table class="table">
+               <tr>
+                  <th><a href="" ng-click="orderByField='name'; reverseSort = !reverseSort">Name</a>
+                  </th>
+                  <th><a href="" ng-click="orderByField='price'; reverseSort = !reverseSort">Price</a>
+                  </th>
+                  <th><a href="" ng-click="orderByField='rating'; reverseSort = !reverseSort">Rating</a>
+                  </th>
+                  <th><a href="" ng-click="orderByField='country'; reverseSort = !reverseSort">Country</a>
+                  </th>
+                  <th>Action
+                  </th>
+               </tr>
+               <tr ng-repeat="item in hotels  | filter: searchKeyword | orderBy:orderByField:reverseSort">
+                  <td>{{item.name}}</td>
+                  <td>{{item.price}}</td>
+                  <td>{{item.rating}}</td>
+                  <td>{{item.country}}</td>
+                  <td>
+                     <input type="button" value="Remove" class="btn btn-primary" ng-click="removeRow(item.name)"/>
+                  </td>
+               </tr>
+            </table>
+
+         </section>
+         
+      </section>
+     
+   </body>
+</html>

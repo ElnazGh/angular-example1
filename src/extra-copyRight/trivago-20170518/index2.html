@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en" >
+   <head>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes"/>
+      <title> Elle - Web Design Brisbane | homepage | moreLayouts, blurb, imageCaption </title>
+      <meta name="robots" content="noindex, nofollow, nosnippet, noarchive" />
+      <meta name="googlebot" content="noodp" />
+      <meta name="slurp" content="noydir" />
+      <meta name="keywords" content="null" />
+      <meta name="description" content="null" />
+      <meta name="HandheldFriendly" content="false"/>
+      <meta name="format-detection" content="telephone=no"/>
+      <meta name="author" content="Elnaz Gharaee"/>
+      <meta name="icbm" content="-27.471084,153.015999"/>
+      <!-- style -->
+      <link rel="stylesheet" type="text/css" href="css/index2-main.css"/>
+      <link rel="stylesheet" type="text/css" href="css/mediaqueries.css"/>
+
+      <!-- Date Picker -->
+      <link rel="stylesheet" href="foundation/css/foundation-datepicker.min.css">
+
+      <!-- favicon -->
+      <!-- <link rel="shortcut icon" type="image/x-icon"  href="images/favicon.ico" /> -->
+      <!-- scripts -->
+   
+
+      <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" /> -->
+
+      <script src="https://code.angularjs.org/1.3.0/angular.js"></script>
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+
+      <!-- Date Picker JS -->
+      <script src="foundation/js/foundation-datepicker.min.js"></script>
+
+      <!-- main JS -->
+      <script type="text/javascript" src="js/functions.js"></script>
+      
+     <!--  <link rel="stylesheet" href="style.css" /> -->
+      <script src="script.js"></script>
+      <script src="dirPagination.js"></script>
+      
+</head>
+
+<body>
+   <!-- header starts -->
+   <header>
+      <a href="index.html" target="_self" title="Trivago" class="logo">
+         <img src="images/trivagoLogo.svg" width="100%" alt="Trivago Logo"/>
+      </a>
+      <!-- responsive nav bar -->
+      <div class="nav-bar">
+         <a href=""><span class="icon">Filters</span></a>
+      </div>
+      <!-- navigation -->
+      <nav>
+         <ul>
+            <li class="icon nav-bar-close"></li>
+            <li class="sub-menu">
+               <a href="#" class="icon">My Profile</a>
+               <!-- children nav -->
+               <ul class="children">
+                  <li><a href="">Log in</a></li>
+                  <li><a href="">Sign up</a></li>
+               </ul>
+            </li>
+            <li><a href="#">AUD</a></li>
+            <li><a href="#" class="icon heart-icon"></a></li>
+         </ul>
+      </nav> <!-- navigation end -->
+      
+   </header> <!-- header end -->
+      <section class="page-holder" ng-app="bookingApp" ng-controller="MyController" >
+         <section class="search-section" >
+             <form id="searchForm" method="post" action="index.html" >
+                <input id="search" name="search" type="search" placeholder="e.g. Australia" ng-model="searchKeyword" class="form-control" />
+                <input id="submit" name="submit" type="submit" placeholder="Search" class="form-control btn-search" />
+            <!-- Start - Date Range Filter -->
+               <input id="check-in" name="check-in" placeholder="check-in" required="required" />
+               <input id="check-out" name="check-out" placeholder="check-out" required="required" />
+               <select ng-model="searchRooms" class="dd-rooms" placeholder="" required="required" >
+                <option value="Single Room" class="icon">Single Room</option>
+                <option value="Double Room" class="icon">Double Room</option>
+                <option value="Family Rooms" class="icon">Family Rooms</option>
+                <option value="Multiple Rooms" class="icon">Multiple Rooms</option>
+              </select>
+            </form>
+            <!-- End - Date Range Filter -->
+         </section>
+         <section class="page-container" >
+          <div id="left-section">
+            <p>Use an HTML table element with the ng-repeat directive to render only the items for the current page. All the pagination logic should be handled in a custom filter and controller implementation.Let us start with the template using Twitter Bootstrap for the table and pagination elements</p>
+          </div>
+          <div id="main-section">
+            <h3>Hotels Page: {{ currentPage }}</h3>
+              <label for="search">items per page:</label>
+              <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+              <select ng-model="$ctrl.orderProp" class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched">
+                <option value="name">Alphabetical</option>
+                <option value="price">Lowest Price</option>
+                <option value="price">Lowest Rate</option>
+              </select>
+            <br>
+            <ul class="hotel-items">
+              <li dir-paginate="item in hotels | filter:searchKeyword | filter:searchRooms | itemsPerPage: pageSize | orderBy:$ctrl.orderProp" current-page="currentPage" >
+
+                <img src="images/small-images/{{item.imageUrl}}" alt="{{item.name}}" width="100%" />
+                <div class="item-des">
+                  <ul class="item-des-col1">
+                    <li>
+                      <h1>{{ item.name }}</h1>
+                      <div class="item-stars">{{ item.stars }}</div>
+                      <p>{{ item.country }}</p>
+                    </li>
+                    <li>
+                      <table id="hotel-prices" title="hotel-prices">
+                        <thead><tr><th></th></tr></thead>
+                        <tfoot><tr><td></td></tr></tfoot>
+                        <tbody>
+                        <tr>
+                          <td>{{ item.price['webItems'][0].siteName }}</td>
+                          <td><b>&#36;{{ item.price['webItems'][0].sitePrice }}</b></td>
+                          <td>{{ item.price['webItems'][1].siteName }}</td>
+                          <td><b>&#36;{{ item.price['webItems'][1].sitePrice }}</b></td>
+                        </tr>
+                        <tr>
+                          <td>{{ item.price['webItems'][2].siteName }}</td>
+                          <td><b>&#36;{{ item.price['webItems'][2].sitePrice }}</b></td>
+                          <td>{{ item.price['webItems'][3].siteName }}</td>
+                          <td><b>&#36;{{ item.price['webItems'][3].sitePrice }}</b></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </li>
+                    <li>
+                      <div class="sub-item-col1">
+                        <p><b>{{ item.rating }} / 100</b></p>
+                      </div>
+                      <div class="sub-item-col2">
+                        <p><b>View all deals</b><br/>from 21 websites</p>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="item-des-col2">
+                    <p>{{ item.price['webItems'][4].siteName }}<br/>{{ item.price['webItems'][4].sitePrice }}<br/>{{ item.price['webItems'][4].sitePrice }}</p>
+                    <button type="submit" value="View Deal" class="btn btn-primary">
+                      View Deal <i class="icon btn-arrow"></i>
+                    </button>
+                  </div>
+                </div>
+
+              </li>
+            </ul>
+
+            <div ng-controller="OtherController" class="pagination">
+                <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination.tpl.html"></dir-pagination-controls>
+            </div>
+          </div>
+        </section> 
+      </section>
+  </body>
+</html>

@@ -1,0 +1,394 @@
+[
+  {
+    "name": "Almudaina",
+    "price":{
+              "webItems": [
+                {"siteName":"Booking.com", "sitePrice":"96"},
+                {"siteName":"Hotels.com", "sitePrice":"96"},
+                {"siteName":"Hotwire", "sitePrice":"96"},
+                {"siteName":"Amoma.com", "sitePrice":"196"},
+                {"siteName":"Expedia", "sitePrice":"96"}
+              ]
+            },
+    "stars": "4",
+    "rating": "87",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-07-20", "endDate":"2017-07-25"},
+                          {"startDate":"2017-07-24", "endDate":"2017-07-25"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-08-20", "endDate":"2017-08-25"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-07-26", "endDate":"2017-07-28"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "almudaina.jpg"
+  },
+  {
+    "name": "HM Jaime III",
+    "price":{
+              "webItems": [
+                {"siteName":"Hotels.com", "sitePrice":"132"},
+                {"siteName":"Orbitz", "sitePrice":"132"},
+                {"siteName":"Priceline.com", "sitePrice":"132"},
+                {"siteName":"Amoma.com", "sitePrice":"263"},
+                {"siteName":"Booking.com", "sitePrice":"132"}
+              ]
+            },
+    "stars": "4",
+    "rating": "83",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-07-22", "endDate":"2017-07-23"},
+                          {"startDate":"2017-07-27", "endDate":"2017-07-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-08-20", "endDate":"2017-08-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-07-17", "endDate":"2017-07-25"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "hmJaime.jpg"
+  },
+  {
+    "name": "Isla Mallorca & Spa",
+    "price":{
+              "webItems": [
+                {"siteName":"Booking.com", "sitePrice":"80"},
+                {"siteName":"Priceline.com", "sitePrice":"80"},
+                {"siteName":"Hotels.com", "sitePrice":"80"},
+                {"siteName":"Amoma.com", "sitePrice":"162"},
+                {"siteName":"Orbitz", "sitePrice":"80"}
+              ]
+            },
+    "stars": "4",
+    "rating": "83",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-07-02", "endDate":"2017-07-03"},
+                          {"startDate":"2017-07-07", "endDate":"2017-07-11"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-08-23", "endDate":"2017-08-28"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-07-17", "endDate":"2017-07-23"}
+                        ]
+              },
+    "country": "Australia",
+    "imageUrl": "islaMallorcaSpa.jpg"
+  },
+  {
+    "name": "Saratoga",
+    "price":{
+              "webItems": [
+                {"siteName":"Hotels.com", "sitePrice":"95"},
+                {"siteName":"Expedia", "sitePrice":"95"},
+                {"siteName":"Orbitz", "sitePrice":"95"},
+                {"siteName":"Amoma.com", "sitePrice":"210"},
+                {"siteName":"Booking.com", "sitePrice":"95"}
+              ]
+            },
+    "stars": "4",
+    "rating": "83",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-07-28", "endDate":"2017-08-04"},
+                          {"startDate":"2017-08-27", "endDate":"2017-08-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-07-20", "endDate":"2017-07-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-08-17", "endDate":"2017-08-25"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "saratoga.jpg"
+  },
+  {
+    "name": "Innside Palma Center",
+    "price":{
+              "webItems": [
+                {"siteName":"Hotels.com", "sitePrice":"100"},
+                {"siteName":"Expedia", "sitePrice":"100"},
+                {"siteName":"Booking.com", "sitePrice":"100"},
+                {"siteName":"Priceline.com", "sitePrice":"100"},
+                {"siteName":"Orbitz", "sitePrice":"100"}
+              ]
+            },
+    "stars": "263",
+    "rating": "83",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-07-22", "endDate":"2017-07-23"},
+                          {"startDate":"2017-07-27", "endDate":"2017-07-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-08-20", "endDate":"2017-08-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-07-17", "endDate":"2017-07-25"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "innsidePalmaCenter.jpg"
+  },
+  {
+    "name": "Amic Horizonte",
+    "price":{
+              "webItems": [
+                {"siteName":"Wotif.com", "sitePrice":"118"},
+                {"siteName":"Hotels.com", "sitePrice":"121"},
+                {"siteName":"Booking.com", "sitePrice":"122"},
+                {"siteName":"sembo", "sitePrice":"153"},
+                {"siteName":"Expedia", "sitePrice":"118"}
+              ]
+            },
+    "stars": "3",
+    "rating": "83",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-07-12", "endDate":"2017-07-13"},
+                          {"startDate":"2017-08-24", "endDate":"2017-08-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-09-20", "endDate":"2017-09-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-07-19", "endDate":"2017-07-27"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "amicHorizonte.jpg"
+  },
+  {
+    "name": "Costa Azul",
+    "price":{
+              "webItems": [
+                {"siteName":"Wotif.com", "sitePrice":"225"},
+                {"siteName":"Booking.com", "sitePrice":"226"},
+                {"siteName":"Qantas", "sitePrice":"225"},
+                {"siteName":"sembo", "sitePrice":"306"},
+                {"siteName":"Expedia", "sitePrice":"225"}
+              ]
+            },
+    "stars": "4",
+    "rating": "83",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-08-22", "endDate":"2017-08-26"},
+                          {"startDate":"2017-09-27", "endDate":"2017-09-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-07-20", "endDate":"2017-07-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-07-27", "endDate":"2017-07-29"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "costaAzul.jpg"
+  },
+  {
+    "name": "Catalonia Majórica",
+    "price":{
+              "webItems": [
+                {"siteName":"Elvoline", "sitePrice":"206"},
+                {"siteName":"otel.com", "sitePrice":"203"},
+                {"siteName":"Hotelopia", "sitePrice":"194"},
+                {"siteName":"sembo", "sitePrice":"243"},
+                {"siteName":"Booking.com", "sitePrice":"194"}
+              ]
+            },
+    "stars": "4",
+    "rating": "83",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-07-22", "endDate":"2017-07-23"},
+                          {"startDate":"2017-07-27", "endDate":"2017-07-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-08-20", "endDate":"2017-08-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-07-17", "endDate":"2017-07-25"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "cataloniaMajorica.jpg"
+  },
+  {
+    "name": "BQ Augusta",
+    "price":{
+              "webItems": [
+                {"siteName":"Elvoline", "sitePrice":"155"},
+                {"siteName":"otel.com", "sitePrice":"162"},
+                {"siteName":"Hotelopia", "sitePrice":"152"},
+                {"siteName":"sembo", "sitePrice":"184"},
+                {"siteName":"Hotels.com", "sitePrice":"151"}
+              ]
+            },
+    "stars": "4",
+    "rating": "83",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-08-22", "endDate":"2017-08-26"},
+                          {"startDate":"2017-09-27", "endDate":"2017-09-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-07-20", "endDate":"2017-07-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-07-27", "endDate":"2017-07-29"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "bqAugusta.jpg"
+  },
+  {
+    "name": "TRYP Palma Bellver",
+    "price":{
+              "webItems": [
+                {"siteName":"Hotel website", "sitePrice":"229"},
+                {"siteName":"Hotels.com", "sitePrice":"243"},
+                {"siteName":"Booking.com", "sitePrice":"244"},
+                {"siteName":"sembo", "sitePrice":"313"},
+                {"siteName":"Meliá.com", "sitePrice":"229"}
+              ]
+            },
+    "stars": "4",
+    "rating": "79",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-08-22", "endDate":"2017-08-26"},
+                          {"startDate":"2017-09-27", "endDate":"2017-09-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-07-20", "endDate":"2017-07-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-07-27", "endDate":"2017-07-29"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "trypPalmaBellver.jpg"
+  },
+  {
+    "name": "Hotel Saratoga",
+    "price":{
+              "webItems": [
+                {"siteName":"Hotels.com", "sitePrice":"219"},
+                {"siteName":"Wotif.com", "sitePrice":"213"},
+                {"siteName":"Booking.com", "sitePrice":"220"},
+                {"siteName":"sembo", "sitePrice":"316"},
+                {"siteName":"Expedia", "sitePrice":"213"}
+              ]
+            },
+    "stars": "4",
+    "rating": "82",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-10-12", "endDate":"2017-10-16"},
+                          {"startDate":"2017-09-27", "endDate":"2017-09-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-08-20", "endDate":"2017-08-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-08-07", "endDate":"2017-08-09"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "saratoga.jpg"
+  },
+  {
+    "name": "Meliá Palas Atenea",
+    "price":{
+              "webItems": [
+                {"siteName":"Hotel website", "sitePrice":"459"},
+                {"siteName":"Elvoline", "sitePrice":"265"},
+                {"siteName":"Prestigia", "sitePrice":""},
+                {"siteName":"sembo", "sitePrice":"573"},
+                {"siteName":"Booking.com", "sitePrice":"253"}
+              ]
+            },
+    "stars": "4",
+    "rating": "83",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-09-27", "endDate":"2017-10-06"},
+                          {"startDate":"2017-08-27", "endDate":"2017-08-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-08-20", "endDate":"2017-08-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-09-07", "endDate":"2017-09-09"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "meliaPalasAtenea.jpg"
+  },
+  {
+    "name": "Gran Meliá Victoria",
+    "price":{
+              "webItems": [
+                {"siteName":"Elvoline", "sitePrice":"361"},
+                {"siteName":"otel.com", "sitePrice":"360"},
+                {"siteName":"Prestigia", "sitePrice":""},
+                {"siteName":"Cancelon.com", "sitePrice":"364"},
+                {"siteName":"Booking.com", "sitePrice":"345"}
+              ]
+            },
+    "stars": "5",
+    "rating": "87",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-10-12", "endDate":"2017-10-16"},
+                          {"startDate":"2017-09-27", "endDate":"2017-09-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-08-20", "endDate":"2017-08-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-08-07", "endDate":"2017-08-09"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "granMeliaVic.jpg"
+  },
+  {
+    "name": "Isla Mallorca & Spa",
+    "price":{
+              "webItems": [
+                {"siteName":"Elvoline", "sitePrice":""},
+                {"siteName":"otel.com", "sitePrice":""},
+                {"siteName":"Prestigia", "sitePrice":""},
+                {"siteName":"HRS.com", "sitePrice":"255"},
+                {"siteName":"Booking.com", "sitePrice":"223"}
+              ]
+            },
+    "stars": "4",
+    "rating": "83",
+    "rooms" : {
+                "Single Room": [
+                          {"startDate":"2017-09-27", "endDate":"2017-10-06"},
+                          {"startDate":"2017-08-27", "endDate":"2017-08-28"}
+                        ],
+                "Double Room": [
+                          {"startDate":"2017-08-20", "endDate":"2017-08-22"}
+                        ],
+                "Family Rooms": [
+                          {"startDate":"2017-09-07", "endDate":"2017-09-09"}
+                        ]
+              },
+    "country": "Palma de Majorca",
+    "imageUrl": "islaMallorcaSpa.jpg"
+  }
+]

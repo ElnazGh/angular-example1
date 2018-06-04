@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en">
+   <head>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes"/>
+      <title> Deloitte - Web Design Brisbane | homepage | moreLayouts, blurb, imageCaption </title>
+      <meta name="robots" content="noindex, nofollow, nosnippet, noarchive" />
+      <meta name="googlebot" content="noodp" />
+      <meta name="slurp" content="noydir" />
+      <meta name="keywords" content="null" />
+      <meta name="description" content="null" />
+      <meta name="HandheldFriendly" content="false"/>
+      <meta name="format-detection" content="telephone=no"/>
+      <meta name="author" content="Elnaz Gharaee"/>
+      <meta name="icbm" content="-27.471084,153.015999"/>
+      <!-- style -->
+      <link rel="stylesheet" type="text/css" href="css/main.css"/>
+      <link rel="stylesheet" type="text/css" href="css/mediaqueries.css"/>
+
+      <!-- react -->
+      <link rel="stylesheet" href="css/react-search-input.css">
+
+      <!-- favicon -->
+      <link rel="shortcut icon" type="image/x-icon"  href="images/deloitte-favicon.ico" />
+      <!-- scripts -->
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+
+      <!-- main JS -->
+      <script type="text/javascript" src="js/functions.js"></script>
+
+      <!-- react -->
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.0/react.min.js"></script>
+         <script src="js/react-search-input.js"></script>
+         
+   </head>
+   <body>
+   <!-- header starts -->
+   <header>
+      <a href="index.html" target="_self" title="Trivago" class="logo">
+         <img src="images/trivagoLogo.svg" width="100%" alt="Trivago Logo"/>
+      </a>
+      <!-- responsive nav bar -->
+      <div class="nav-bar">
+         <a href=""><span class="icon">Filters</span></a>
+      </div>
+      <!-- navigation -->
+      <nav>
+         <ul>
+            <li class="icon nav-bar-close"></li>
+            <li class="sub-menu">
+               <a href="#" class="icon">My Profile</a>
+               <!-- children nav -->
+               <ul class="children">
+                  <li><a href="">Log in</a></li>
+                  <li><a href="">Sign up</a></li>
+               </ul>
+            </li>
+            <li><a href="#">AUD</a></li>
+            <li><a href="#" class="icon heart-icon"></a></li>
+         </ul>
+      </nav> <!-- navigation end -->
+      
+   </header> <!-- header end -->
+      <section class="page-holder">
+         <section class="search-section">
+            <!-- Start - Date Range Filter -->
+            <div id="app"></div>
+            <script>
+             var App = React.createClass({
+               displayName: "App",
+
+               render() {
+                 var mails = [{
+                   user: {
+                     name: 'Mathieu',
+                     job: 'Software Engineer',
+                     company: 'Enki'
+                   },
+                   subject: 'Hi!'
+                 }, {
+                   user: {
+                     name: 'foo'
+                   },
+                   subject: 'bar'
+                 }, {
+                   user: {
+                     name: 'bar'
+                   },
+                   subject: 'foo'
+                 }];
+
+                 if (this.refs.search) {
+                   var filters = ['user.name', 'subject'];
+                   mails = mails.filter(this.refs.search.filter(filters));
+                 }
+
+                 return (
+                   React.createElement("div", null,
+                     React.createElement(SearchInput, {ref: "search", onChange: this.searchUpdated}),
+                       mails.map(function(mail) {
+                         return (
+                           React.createElement("div", {className: "mail"},
+                             React.createElement("div", {className: "from"}, mail.user.name),
+                             React.createElement("div", {className: "subject"}, mail.subject)
+                           )
+                         );
+                       })
+                   )
+                 );
+               },
+
+               searchUpdated(term) {
+                 this.setState({searchTerm: term}); // needed to force re-render
+               }
+             });
+
+             React.render(React.createElement(App, null), document.getElementById("app"));
+         </script>
+            <form id="searchForm" method="post" action="index.html" >
+               <input id="check-in" name="check-in" type="date" placeholder="check-in" required="required">
+               <input id="check-out" name="check-out" type="date" placeholder="check-out" required="required">
+
+            </form>
+            <!-- End - Date Range Filter -->
+         </section>
+         <section id="search-container">
+              
+         </section>
+         
+      </section>
+     
+   </body>
+</html>

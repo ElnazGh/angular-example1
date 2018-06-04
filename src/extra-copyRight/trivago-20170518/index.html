@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en">
+   <head>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes"/>
+      <title> Elle - Web Design Brisbane | homepage | moreLayouts, blurb, imageCaption </title>
+      <meta name="robots" content="noindex, nofollow, nosnippet, noarchive" />
+      <meta name="googlebot" content="noodp" />
+      <meta name="slurp" content="noydir" />
+      <meta name="keywords" content="null" />
+      <meta name="description" content="null" />
+      <meta name="HandheldFriendly" content="false"/>
+      <meta name="format-detection" content="telephone=no"/>
+      <meta name="author" content="Elnaz Gharaee"/>
+      <meta name="icbm" content="-27.471084,153.015999"/>
+      <!-- style -->
+      <link rel="stylesheet" type="text/css" href="css/index-main.css"/>
+      <link rel="stylesheet" type="text/css" href="css/mediaqueries.css"/>
+      <!-- favicon -->
+      <!-- <link rel="shortcut icon" type="image/x-icon"  href="images/favicon.ico" /> -->
+      <!-- scripts -->
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+
+      <!-- main JS -->
+      <script type="text/javascript" src="js/functions.js"></script>
+      
+      <script src="http://code.angularjs.org/1.1.0/angular.min.js"></script>
+
+   </head>
+   <body>
+      <script>
+         var bookingApp = angular.module("bookingApp", []);
+         bookingApp.controller("hotelCtrl", function($scope, $http) {
+            $http.get('hotels.json').success(function(data, status, headers, config) {
+               $scope.hotels = data;
+             }).error(function(data, status, headers, config) {
+               // log error
+             });
+
+         // $scope.hotels = [
+         //                     { 'name':'Infosys Technologies',
+         //                      'employees': 125000,
+         //                      'country': 'Australia'},
+         //                      { 'name':'Cognizant Technologies',
+         //                         'employees': 100000,
+         //                         'country': 'Australia'},
+         //                         { 'name':'Wipro',
+         //                            'employees': 115000,
+         //                            'country': 'United Kingdom'},
+         //                            { 'name':'Tata Consultancy Services (TCS)',
+         //                               'employees': 150000,
+         //                               'country': 'Australia'},
+         //                               { 'name':'HCL Technologies',
+         //                                  'employees': 90000,
+         //                                  'country': 'Spain'},
+         //                     ];
+            $scope.addRow = function(){      
+               $scope.hotels.push({ 'name':$scope.name, 'price': $scope.price, 'rating': $scope.rating, 'country':$scope.country });
+               $scope.name='';
+               $scope.price='';
+               $scope.rating='';
+               $scope.country='';
+            };
+            $scope.removeRow = function(name){           
+               var index = -1;      
+               var comArr = eval( $scope.hotels );
+               for( var i = 0; i < comArr.length; i++ ) {
+                  if( comArr[i].name === name ) {
+                     index = i;
+                     break;
+                  }
+               }
+               if( index === -1 ) {
+                  alert( "Something gone wrong" );
+               }
+               $scope.hotels.splice( index, 1 );      
+            };
+            
+            //Sort
+            $scope.sort = function(keyname){
+              $scope.sortKey = keyname;   //set the sortKey to the param passed
+              $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+            }
+            //pagination
+            $scope.itemsPerPage = 3;
+            $scope.currentPage = 0;
+            $scope.hotels = [];
+
+            $scope.totalItems = $scope.hotels.length;
+
+           for( var i = 0; i < $scope.totalItems; i++ ) {
+             $scope.hotels.push({
+               //id: i, name: "name "+ i, description: "description " + i
+               name:"name "+ i, price: "price "+ i, rating: "rating "+ i, country:"country "+ i
+             });
+           }
+
+                
+            $scope.range = function() {
+               var rangeSize = $scope.pageCount()+1;
+               var ret = [];
+               var start;
+
+               start = $scope.currentPage;
+               if ( start > $scope.pageCount()-rangeSize ) {
+                 start = $scope.pageCount()-rangeSize+1;
+               }
+
+               for (var i=start; i<start+rangeSize; i++) {
+                 ret.push(i);
+               }
+
+               return ret;
+             };
+
+            $scope.firstPage = function() {
+             $scope.setPage(0);
+           };
+
+           $scope.firstPageDisabled = function() {
+             return $scope.currentPage === 0 ? "disabled" : "";
+           };
+
+           $scope.prevPage = function() {
+             if ($scope.currentPage > 0) {
+               $scope.currentPage--;
+             }
+           };
+
+           $scope.prevPageDisabled = function() {
+             return $scope.currentPage === 0 ? "disabled" : "";
+           };
+
+           $scope.pageCount = function() {
+             return Math.ceil($scope.hotels.length/$scope.itemsPerPage)-1; 
+           };
+
+           $scope.nextPage = function() {
+             if ($scope.currentPage < $scope.pageCount()) {
+               $scope.currentPage++;
+             }
+           };
+
+           $scope.nextPageDisabled = function() {
+             return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
+           };
+
+           $scope.lastPage = function() {
+             if ($scope.currentPage < $scope.pageCount()) {
+               $scope.setPage(Math.ceil($scope.hotels.length/$scope.itemsPerPage)-1);
+             }
+           };
+            $scope.lastPageDisabled = function() {
+             return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
+           };
+
+            $scope.setPage = function(n) {
+             $scope.currentPage = n;
+           };
+              
+            // $scope.searchKeyword = function() {
+            //    // default to no match
+            //    if (filter) {
+            //       $scope.setPage(0);
+            //    };
+            // };
+
+             $scope.search=function(){
+               $scope.setPage(0);
+              //  console.log($scope.searchKeyword);
+              // $scope.searchKeyword = angular.copy($scope.searchKeyword);
+              // data = angular.copy($scope.searchKeyword);;
+              // console.log(data);
+              // $scope.searchReasult=true;
+
+          }
+          
+         });
+
+        //pagination
+         bookingApp.filter('offset', function() {
+            return function(input, start) {
+              start = parseInt(start, 10);
+              return input.slice(start);
+            };
+         });
+        
+
+         </script>
+   <!-- header starts -->
+   <header>
+      <a href="index.html" target="_self" title="Trivago" class="logo">
+         <img src="images/trivagoLogo.svg" width="100%" alt="Trivago Logo"/>
+      </a>
+      <!-- responsive nav bar -->
+      <div class="nav-bar">
+         <a href=""><span class="icon">Filters</span></a>
+      </div>
+      <!-- navigation -->
+      <nav>
+         <ul>
+            <li class="icon nav-bar-close"></li>
+            <li class="sub-menu">
+               <a href="#" class="icon">My Profile</a>
+               <!-- children nav -->
+               <ul class="children">
+                  <li><a href="">Log in</a></li>
+                  <li><a href="">Sign up</a></li>
+               </ul>
+            </li>
+            <li><a href="#">AUD</a></li>
+            <li><a href="#" class="icon heart-icon"></a></li>
+         </ul>
+      </nav> <!-- navigation end -->
+      
+   </header> <!-- header end -->
+      <section class="page-holder" ng-app="bookingApp" ng-controller="hotelCtrl">
+         <section class="search-section" >
+            <form class="form-inline">
+              <div class="form-group">
+                  <label >Search</label>
+                  <input type="text" ng-model="searchKeyword" class="form-control" placeholder="Search" ng-change="search()">
+              </div>
+          </form>
+            <!-- Start - Date Range Filter -->
+            <form id="searchForm" method="post" action="index.html" >
+               <!-- <label for="search">Search</label>
+               <input id="search" name="search" type="text" class="ng-valid ng-dirty" ng-model="searchKeyword" > -->
+
+               <input id="check-in" name="check-in" type="date" placeholder="check-in" required="required">
+               <input id="check-out" name="check-out" type="date" placeholder="check-out" required="required">
+            </form>
+            <!-- End - Date Range Filter -->
+         </section>
+         <section id="search-container" >
+
+            <table class="table" >
+               <tbody>
+               <tr>
+                  <th>
+                     <a href="" ng-click="sort('name')">Name
+                        <!-- <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
+                     </a>
+                  </th>
+                  <th>
+                     <a href="" ng-click="sort('price')">Price
+                        <!-- <span class="glyphicon sort-icon" ng-show="sortKey=='price'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
+                     </a>
+                  </th>
+                  <th>
+                     <a href="" ng-click="sort('rating')">Rating
+                        <!-- <span class="glyphicon sort-icon" ng-show="sortKey=='rating'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
+                     </a>
+                  </th>
+                  <th>
+                     <a href="" ng-click="sort('country')">Country
+                        <!-- <span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
+                     </a> <!-- ng-click="orderByField='country'; reverseSort = !reverseSort" -->
+                  </th>
+                  <th>Action
+                  </th>
+               </tr>
+               <tr ng-repeat="item in hotels  | filter: searchKeyword | orderBy:sortKey:reverse | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">  <!-- orderBy:orderByField:reverseSort -->
+                  <td>{{item.name}}</td>
+                  <td>{{item.price}}</td>
+                  <td>{{item.rating}}</td>
+                  <td>{{item.country}}</td>
+                  <td>
+                     <input type="button" value="Remove" class="btn btn-primary" ng-click="removeRow(item.name)"/>
+                  </td>
+               </tr>
+               </tbody>
+               <tfoot>
+                  <td colspan="5">
+                    <div class="pagination">
+                      <ul>
+                        <li ng-class="firstPageDisabled()">
+                          <a href="#" ng-click="firstPage()">« First</a>
+                        </li>
+                        <li ng-class="prevPageDisabled()">
+                          <a href="#" ng-click="prevPage()">« Prev</a>
+                        </li>
+                        <li ng-repeat="n in range()"
+                          ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                          <a href="#">{{n+1}}</a>
+                        </li>
+                        <li ng-class="nextPageDisabled()">
+                          <a href="#" ng-click="nextPage()">Next »</a>
+                        </li>
+                        <li ng-class="lastPageDisabled()">
+                          <a href="#" ng-click="lastPage()">Last »</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tfoot>         
+            </table>
+
+            <form class="form-horizontal ng-pristine ng-valid" role="form" ng-submit="addRow()">
+                     <div class="form-group">
+                        <label class="col-md-2 control-label">Name</label>
+                        <div class="col-md-4">
+                           <input type="text" class="form-control ng-pristine ng-valid" name="name" ng-model="name">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-md-2 control-label">Employees</label>
+                        <div class="col-md-4">
+                           <input type="text" class="form-control ng-pristine ng-valid" name="price" ng-model="price">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-md-2 control-label">Headoffice</label>
+                        <div class="col-md-4">
+                           <input type="text" class="form-control ng-pristine ng-valid" name="rating" ng-model="rating">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-md-2 control-label">Headoffice</label>
+                        <div class="col-md-4">
+                           <input type="text" class="form-control ng-pristine ng-valid" name="Country" ng-model="Country">
+                        </div>
+                     </div>
+                     <div class="form-group">                        
+                        <div style="padding-left:110px">
+                           <input type="submit" value="Submit" class="btn btn-primary">
+                        </div>
+                     </div>
+                  </form>
+
+         </section>
+         
+      </section>
+     
+   </body>
+</html>
